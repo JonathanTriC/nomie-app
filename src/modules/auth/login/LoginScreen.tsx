@@ -15,13 +15,15 @@ const LoginScreen: React.FC = () => {
         },
         tags: 'login',
       });
-
       console.log('data from mutation:', data);
 
       return data;
     },
     onSuccess: data => {
       console.log('Login successful! Token:', data.token);
+    },
+    onError: data => {
+      console.log('Login failed! Error:', data?.message);
     },
   });
 

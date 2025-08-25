@@ -31,14 +31,29 @@ const apiGetWithoutToken: <T = any>(props: ApiProps) => Promise<T> = async (
       });
     }
 
+    if (e.response) {
+      console.log('🚀 ~ apiGetWithoutToken ~ status:', e.response.status);
+      console.log('🚀 ~ apiGetWithoutToken ~ data:', e.response.data);
+    } else if (e.request) {
+      console.log('🚀 ~ apiGetWithoutToken ~ request:', e.request);
+    } else {
+      console.log('🚀 ~ apiGetWithoutToken ~ message:', e.message);
+    }
+    const errData = e.response?.data ?? e.message;
+
     logApi({
       nameFunction: 'apiGetWithoutToken',
       tags: props?.tags,
       body: props?.body,
-      e: e,
+      e: errData,
     });
 
-    const errorData = e?.response?.data?.message || 'Terjadi Kesalahan';
+    const errorData = {
+      status: e?.response?.status,
+      message: errData || 'Terjadi Kesalahan',
+      data: e?.response?.data,
+    };
+
     return Promise.reject(errorData);
   }
 };
@@ -72,14 +87,29 @@ const apiGet: <T = any>(props: ApiProps) => Promise<T> = async (
       });
     }
 
+    if (e.response) {
+      console.log('🚀 ~ apiGet ~ status:', e.response.status);
+      console.log('🚀 ~ apiGet ~ data:', e.response.data);
+    } else if (e.request) {
+      console.log('🚀 ~ apiGet ~ request:', e.request);
+    } else {
+      console.log('🚀 ~ apiGet ~ message:', e.message);
+    }
+    const errData = e.response?.data ?? e.message;
+
     logApi({
       nameFunction: 'apiGet',
       tags: props?.tags,
       body: props?.body,
-      e: e,
+      e: errData,
     });
 
-    const errorData = e?.response?.data?.message || 'Terjadi Kesalahan';
+    const errorData = {
+      status: e?.response?.status,
+      message: errData || 'Terjadi Kesalahan',
+      data: e?.response?.data,
+    };
+
     return Promise.reject(errorData);
   }
 };
@@ -111,14 +141,29 @@ const apiPostWithoutToken: <T = any>(props: ApiProps) => Promise<T> = async (
       });
     }
 
+    if (e.response) {
+      console.log('🚀 ~ apiPostWithoutToken ~ status:', e.response.status);
+      console.log('🚀 ~ apiPostWithoutToken ~ data:', e.response.data);
+    } else if (e.request) {
+      console.log('🚀 ~ apiPostWithoutToken ~ request:', e.request);
+    } else {
+      console.log('🚀 ~ apiPostWithoutToken ~ message:', e.message);
+    }
+    const errData = e.response?.data ?? e.message;
+
     logApi({
       nameFunction: 'apiPostWithoutToken',
       tags: props?.tags,
       body: props?.body,
-      e: e,
+      e: errData,
     });
 
-    const errorData = e?.response?.data?.message || 'Terjadi Kesalahan';
+    const errorData = {
+      status: e?.response?.status,
+      message: errData || 'Terjadi Kesalahan',
+      data: e?.response?.data,
+    };
+
     return Promise.reject(errorData);
   }
 };
@@ -149,14 +194,29 @@ const apiPost: <T = any>(props: ApiProps) => Promise<T> = async (
       });
     }
 
+    if (e.response) {
+      console.log('🚀 ~ apiPost ~ status:', e.response.status);
+      console.log('🚀 ~ apiPost ~ data:', e.response.data);
+    } else if (e.request) {
+      console.log('🚀 ~ apiPost ~ request:', e.request);
+    } else {
+      console.log('🚀 ~ apiPost ~ message:', e.message);
+    }
+    const errData = e.response?.data ?? e.message;
+
     logApi({
       nameFunction: 'apiPost',
       tags: props?.tags,
       body: props?.body,
-      e: e,
+      e: errData,
     });
 
-    const errorData = e?.response?.data?.message || 'Terjadi Kesalahan';
+    const errorData = {
+      status: e?.response?.status,
+      message: errData || 'Terjadi Kesalahan',
+      data: e?.response?.data,
+    };
+
     return Promise.reject(errorData);
   }
 };

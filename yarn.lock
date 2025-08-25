@@ -2994,6 +2994,7 @@ __metadata:
     react-native-splash-screen: ^3.3.0
     react-native-worklets: 0.4.0
     react-test-renderer: 19.1.0
+    reactotron-react-native: ^5.1.15
     typescript: 5.0.4
   languageName: unknown
   linkType: soft
@@ -7295,6 +7296,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mitt@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "mitt@npm:3.0.1"
+  checksum: b55a489ac9c2949ab166b7f060601d3b6d893a852515ae9eca4e11df01c013876df777ea109317622b5c1c60e8aae252558e33c8c94e14124db38f64a39614b1
+  languageName: node
+  linkType: hard
+
 "mkdirp@npm:^1.0.4":
   version: 1.0.4
   resolution: "mkdirp@npm:1.0.4"
@@ -8227,6 +8235,34 @@ __metadata:
   version: 19.1.0
   resolution: "react@npm:19.1.0"
   checksum: c0905f8cfb878b0543a5522727e5ed79c67c8111dc16ceee135b7fe19dce77b2c1c19293513061a8934e721292bfc1517e0487e262d1906f306bdf95fa54d02f
+  languageName: node
+  linkType: hard
+
+"reactotron-core-client@npm:2.9.7":
+  version: 2.9.7
+  resolution: "reactotron-core-client@npm:2.9.7"
+  dependencies:
+    reactotron-core-contract: 0.2.5
+  checksum: 6149ad998c5cd8dccc41f9b93a21d96e44e1cde04eda2b5e0697327f7aa7d5366cbdf900d61846be269b281342de8d4b09ee8ba1d64aa2d613082e66c914178d
+  languageName: node
+  linkType: hard
+
+"reactotron-core-contract@npm:0.2.5":
+  version: 0.2.5
+  resolution: "reactotron-core-contract@npm:0.2.5"
+  checksum: 54b56322ba05559a9faa1d94407a45c6777c9e50f2efb2a1759eead2acf17e053f68c27e5c4338ac6f7f2d6eb649b4ad375153288659d836ef931df44859047a
+  languageName: node
+  linkType: hard
+
+"reactotron-react-native@npm:^5.1.15":
+  version: 5.1.15
+  resolution: "reactotron-react-native@npm:5.1.15"
+  dependencies:
+    mitt: ^3.0.1
+    reactotron-core-client: 2.9.7
+  peerDependencies:
+    react-native: ">=0.40.0"
+  checksum: d296e2e289da63087d07faa07be0817e653a0e2eb4cc7e94d55796f9205f3def23f498c38c90aacefe026c334dda2079c07069742c54e17eb0d8d2ea11686b2f
   languageName: node
   linkType: hard
 
