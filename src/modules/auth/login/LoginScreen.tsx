@@ -1,11 +1,34 @@
+import { apiPostWithoutToken } from '@api/apiWrapping';
+import { URL_PATH } from '@constants/url';
+import { useMutation } from '@tanstack/react-query';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 const LoginScreen: React.FC = () => {
-  console.log('login screen');
+  const submitLogin = useMutation({
+    mutationKey: ['login'],
+    mutationFn: async () => {
+      const data = await apiPostWithoutToken({
+        url: `${URL_PATH.auth_login}`,
+        body: {
+          email: '',
+          password: '',
+        },
+        tags: 'login',
+      });
+
+      console.log('data from mutation:', data);
+
+      return data;
+    },
+    onSuccess: data => {
+      console.log('Login successful! Token:', data.token);
+    },
+  });
+
   return (
     <View>
-      <TouchableOpacity onPress={() => console.log('login')}>
-        <Text>login</Text>
+      <TouchableOpacity onPress={() => submitLogin.mutate()}>
+        <Text>{submitLogin.isPending ? 'Logging in...' : 'Login'}</Text>
       </TouchableOpacity>
     </View>
   );
