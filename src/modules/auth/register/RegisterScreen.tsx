@@ -3,9 +3,9 @@ import { useNavigate } from '@hooks';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const LoginScreen: React.FC = () => {
+const RegisterScreen: React.FC = () => {
   const { getRouteParams } = useNavigate();
-  const { email } = getRouteParams<LoginScreenParams>();
+  const { email } = getRouteParams<RegisterScreenParams>();
 
   return (
     <KeyboardAwareScrollView
@@ -13,10 +13,10 @@ const LoginScreen: React.FC = () => {
       keyboardShouldPersistTaps="handled"
     >
       <View>
-        <Text text={`Login as: ${email}`} />
+        <Text text={`Register as: ${email}`} />
       </View>
     </KeyboardAwareScrollView>
   );
 };
 
-export { LoginScreen };
+export { RegisterScreen };

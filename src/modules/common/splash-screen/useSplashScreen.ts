@@ -12,7 +12,7 @@ const useSplashScreen = () => {
     //   navigation.reset({index: 0, routes: [{name: 'LoginScreen'}]});
     // }
     setTimeout(() => {
-      resetNavigate('LoginScreen');
+      resetNavigate('OnboardingScreen');
     }, 1000);
   }, [resetNavigate]);
 

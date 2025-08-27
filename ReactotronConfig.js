@@ -6,7 +6,11 @@ import Reactotron, {
 
 const reactotron = Reactotron.configure({ name: 'nomie' })
   .useReactNative()
-  .use(networking())
+  .use(
+    networking({
+      ignoreUrls: /symbolicate|generate_204/,
+    }),
+  )
   .use(openInEditor())
   .use(trackGlobalErrors())
   .connect();

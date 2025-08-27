@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 import { MMKV, Mode } from 'react-native-mmkv';
 
 const storage = new MMKV({
@@ -31,8 +32,13 @@ const handlerClearItem = async () => {
   } catch (error) {}
 };
 
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+
 export {
   storage,
+  screenWidth,
+  screenHeight,
   handlerGetItem,
   handlerSetItem,
   handlerRemoveItem,

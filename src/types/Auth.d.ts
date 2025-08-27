@@ -1,0 +1,3 @@
+type CheckEmailResponse = {
+  isRegistered: boolean;
+};
