@@ -1,4 +1,4 @@
-package com.nomieapp
+package com.jonathantri.nomie
 
 import android.app.Application
 import com.facebook.react.PackageList
