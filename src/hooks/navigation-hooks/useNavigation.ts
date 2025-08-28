@@ -23,7 +23,7 @@ export function useNavigate<T = any>() {
     navigation?.navigate(screen as any, params);
   };
 
-  const popScreen: VoidCallBack = (count?: number) => {
+  const popScreen: (count?: number) => void = (count?: number) => {
     if (!navigation) {
       return;
     }

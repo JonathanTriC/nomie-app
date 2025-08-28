@@ -47,9 +47,14 @@ const useOnboarding = () => {
         const isRegistered = data.isRegistered;
 
         if (isRegistered) {
-          navigateScreen<LoginScreenParams>('LoginScreen', { email });
+          navigateScreen<LoginScreenParams>('LoginScreen', {
+            userEmail: email,
+          });
         } else {
-          navigateScreen<RegisterScreenParams>('RegisterScreen', { email });
+          navigateScreen<RegisterScreenParams>('RegisterScreen', {
+            userEmail: email,
+            isFromOnboarding: true,
+          });
         }
         setValue('email', '');
       },

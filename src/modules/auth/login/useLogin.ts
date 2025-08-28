@@ -1,8 +1,14 @@
 import { apiPostWithoutToken } from '@api';
 import { URL_PATH } from '@constants';
+import { useNavigate } from '@hooks';
 import { useMutation } from '@tanstack/react-query';
+import { useCallback } from 'react';
 
 const useLogin = () => {
+  const { navigateScreen, getRouteParams, popScreen, navigation } =
+    useNavigate();
+  const { userEmail } = getRouteParams<LoginScreenParams>();
+
   const submitLogin = useMutation({
     mutationKey: ['login'],
     mutationFn: async () => {
@@ -26,7 +32,20 @@ const useLogin = () => {
     },
   });
 
-  return { submitLogin };
+  const handleNavigateRegister = useCallback(() => {
+    navigation.setParams({ userEmail: '' });
+    navigateScreen<RegisterScreenParams>('RegisterScreen', {
+      userEmail: '',
+      isFromOnboarding: false,
+    });
+  }, [navigation, navigateScreen]);
+
+  return {
+    userEmail,
+    submitLogin,
+    popScreen,
+    handleNavigateRegister,
+  };
 };
 
 export default useLogin;

@@ -133,7 +133,7 @@ const TextField: FC<TextFieldProps> = ({
       )}
       <Pressable onPress={props.onPress}>
         <TextInput
-          textColor={Colors.neutral.base}
+          textColor={!disabled ? Colors.neutral.base : Colors.neutral.n300}
           testID={testID}
           multiline={multiline ?? false}
           disabled={disabled}
@@ -162,6 +162,8 @@ const TextField: FC<TextFieldProps> = ({
               ? backgroundColor
               : isNotOutline
               ? Colors.neutral.base
+              : disabled
+              ? Colors.neutral.disabled
               : Colors.white,
             ...inputTextStyle,
           }}

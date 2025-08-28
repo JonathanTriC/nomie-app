@@ -1,10 +1,11 @@
 interface SplashScreenParams {}
 interface OnboardingScreenParams {}
 interface LoginScreenParams {
-  email: string;
+  userEmail: string;
 }
 interface RegisterScreenParams {
-  email: string;
+  userEmail: string;
+  isFromOnboarding: boolean;
 }
 
 type ParamList = {
