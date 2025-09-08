@@ -1,4 +1,4 @@
-import { Colors } from '@constants';
+import { Colors, screenWidth } from '@constants';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -42,4 +42,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  successRegisterImg: {
+    width: screenWidth - 40,
+    height: 300,
+    borderRadius: 20,
+  },
+  gap12: { gap: 12 },
+  gap20: { gap: 20 },
 });

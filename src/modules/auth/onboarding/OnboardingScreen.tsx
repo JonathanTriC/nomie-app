@@ -39,6 +39,7 @@ const OnBoardingScreen: React.FC = () => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              leftIcon={'mail'}
               label="Input your email to continue login/register"
               placeholder="Input your email here"
               returnKeyType="done"

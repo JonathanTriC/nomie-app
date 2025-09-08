@@ -14,6 +14,20 @@ const handlerGetItem = (params: string) => {
   } catch (error) {}
 };
 
+const handlerGetAndParseJSON = <T>(key: string): T | null => {
+  try {
+    const item = storage.getString(key);
+
+    if (item) {
+      return JSON.parse(item) as T;
+    }
+    return null;
+  } catch (error) {
+    console.error(`Failed to parse JSON from storage for key "${key}":`, error);
+    return null;
+  }
+};
+
 const handlerSetItem = async (key: string, value: string) => {
   try {
     await storage.set(key, value);
@@ -40,6 +54,7 @@ export {
   screenWidth,
   screenHeight,
   handlerGetItem,
+  handlerGetAndParseJSON,
   handlerSetItem,
   handlerRemoveItem,
   handlerClearItem,

@@ -188,7 +188,7 @@ const styleProps = (
       justifyContent: 'center',
       fontSize: fontSize,
       fontWeight: '600',
-      fontFamily: 'Poppins-SemiBold',
+      fontFamily: 'Jost-Bold',
       color: isDisabled
         ? Colors.neutral.n300
         : outline || primaryLight

@@ -1,15 +1,30 @@
 import { Text } from '@components/text';
 import { Colors, screenWidth } from '@constants';
-import { TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import RadialGradient from 'react-native-radial-gradient';
-import { Button, TextField } from '@components';
+import { BottomModal, Button, TextField } from '@components';
 import { styles } from './styles';
 import useRegister from './useRegister';
+import { Icon } from 'react-native-paper';
+import { Controller } from 'react-hook-form';
+import SuccessRegister from '@assets/images/success-register.png';
 
 const RegisterScreen: React.FC = () => {
-  const { userEmail, isFromOnboarding, popScreen, navigateScreen } =
-    useRegister();
+  const {
+    control,
+    isFromOnboarding,
+    usernameRef,
+    emailRef,
+    passwordRef,
+    confirmPasswordRef,
+    showModalSuccessRegister,
+    toggleSuccessRegisterModal,
+    popScreen,
+    navigateScreen,
+    handleSubmit,
+    onSubmit,
+  } = useRegister();
 
   return (
     <View style={styles.screen}>
@@ -29,9 +44,9 @@ const RegisterScreen: React.FC = () => {
         <View>
           <TouchableOpacity
             style={styles.backComponent}
-            onPress={() => popScreen()}
+            onPress={() => popScreen(2)}
           >
-            <Text text="<" />
+            <Icon source={'arrow-back'} size={16} />
           </TouchableOpacity>
 
           <View style={styles.titleComponent}>
@@ -48,42 +63,131 @@ const RegisterScreen: React.FC = () => {
           </View>
 
           <View style={styles.formComponent}>
-            <TextField
-              label="Fullname"
-              placeholder="Input your fullname here"
-              value={''}
-              onChangeText={() => {}}
+            <Controller
+              control={control}
+              name={'fullname'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  required
+                  label="Fullname"
+                  placeholder="Input your fullname here"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  leftIcon={'person'}
+                  errorMessage={error?.message}
+                  returnKeyType="next"
+                  onSubmitEditing={() => usernameRef.current?.focus()}
+                />
+              )}
             />
-            <TextField
-              label="Username"
-              placeholder="Input your username here"
-              value={''}
-              onChangeText={() => {}}
+
+            <Controller
+              control={control}
+              name={'username'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  ref={usernameRef}
+                  required
+                  label="Username"
+                  placeholder="Input your username here"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  leftIcon={'person'}
+                  errorMessage={error?.message}
+                  returnKeyType="next"
+                  onSubmitEditing={() =>
+                    isFromOnboarding
+                      ? passwordRef.current?.focus()
+                      : emailRef.current?.focus()
+                  }
+                />
+              )}
             />
-            <TextField
-              label="Email Address"
-              placeholder="Input your email here"
-              value={userEmail}
-              disabled={isFromOnboarding}
-              onChangeText={() => {}}
+
+            <Controller
+              control={control}
+              name={'email'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  ref={emailRef}
+                  required
+                  label="Email Address"
+                  placeholder="Input your email here"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  disabled={isFromOnboarding}
+                  leftIcon={'mail'}
+                  keyboardType="email-address"
+                  errorMessage={error?.message}
+                  returnKeyType="next"
+                  onSubmitEditing={() => passwordRef.current?.focus()}
+                />
+              )}
             />
-            <TextField
-              label="Password"
-              placeholder="Input your password here"
-              value={''}
-              onChangeText={() => {}}
-              secure
+            <Controller
+              control={control}
+              name={'password'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  ref={passwordRef}
+                  required
+                  secure
+                  label="Password"
+                  placeholder="Input your password here"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  leftIcon={'lock'}
+                  errorMessage={error?.message}
+                  returnKeyType="next"
+                  onSubmitEditing={() => confirmPasswordRef.current?.focus()}
+                />
+              )}
             />
-            <TextField
-              label="Confirm Password"
-              placeholder="Input your password here"
-              value={''}
-              onChangeText={() => {}}
-              secure
+            <Controller
+              control={control}
+              name={'confirm_password'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  ref={confirmPasswordRef}
+                  required
+                  secure
+                  label="Confirm Password"
+                  placeholder="Input your password here"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  leftIcon={'lock'}
+                  errorMessage={error?.message}
+                  returnKeyType="done"
+                />
+              )}
             />
           </View>
 
-          <Button label="Sign Up" style={styles.btnLoginComponent} />
+          <Button
+            label="Sign Up"
+            style={styles.btnLoginComponent}
+            action={handleSubmit(onSubmit)}
+          />
         </View>
 
         <View style={styles.loginComponent}>
@@ -100,6 +204,39 @@ const RegisterScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
+
+      <BottomModal isVisible={showModalSuccessRegister}>
+        <View style={styles.gap20}>
+          <Image
+            source={SuccessRegister}
+            style={styles.successRegisterImg}
+            resizeMode="cover"
+          />
+          <View style={styles.gap12}>
+            <Text
+              text="Registration Successful!"
+              type="bold-xl"
+              textAlign="center"
+            />
+            <Text
+              text={`Your account has been created.\nPlease login using your new credentials.`}
+              type="regular-base"
+              textAlign="center"
+            />
+          </View>
+          <Button
+            label="Login Now"
+            action={() => {
+              toggleSuccessRegisterModal();
+              setTimeout(() => {
+                navigateScreen<LoginScreenParams>('LoginScreen', {
+                  userEmail: '',
+                });
+              }, 500);
+            }}
+          />
+        </View>
+      </BottomModal>
     </View>
   );
 };

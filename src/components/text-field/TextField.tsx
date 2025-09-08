@@ -192,7 +192,7 @@ const TextField: FC<TextFieldProps> = ({
               />
             ) : secure ? (
               <TextInput.Icon
-                icon={isMaskEntry ? 'eye' : 'eye-off'}
+                icon={isMaskEntry ? 'visibility' : 'visibility-off'}
                 onPress={() => {
                   setMaskEntry(!isMaskEntry);
                 }}

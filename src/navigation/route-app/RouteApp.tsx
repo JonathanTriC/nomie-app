@@ -5,6 +5,8 @@ import { styles } from './styles';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { Navigator } from '@navigation/navigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Provider as PaperProvider } from 'react-native-paper';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const RouteApp = () => {
   const MyTheme = {
@@ -24,9 +26,15 @@ export const RouteApp = () => {
           <StatusBar barStyle={'dark-content'} />
 
           <GestureHandlerRootView style={styles.flex1}>
-            <NavigationContainer theme={MyTheme}>
-              <Navigator />
-            </NavigationContainer>
+            <PaperProvider
+              settings={{
+                icon: props => <MaterialIcons {...props} />,
+              }}
+            >
+              <NavigationContainer theme={MyTheme}>
+                <Navigator />
+              </NavigationContainer>
+            </PaperProvider>
           </GestureHandlerRootView>
         </SafeAreaView>
       </SafeAreaProvider>

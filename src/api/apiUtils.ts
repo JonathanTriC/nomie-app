@@ -4,8 +4,30 @@ const logApi = (props: ApiLog) => {
       return;
     }
 
+    let url = '';
+    let statusCode: any = 0;
+    let body = JSON.stringify(props.body || '');
+    let data = '';
+    let isError = props.e ? 'error' : '';
+
     if (props.e && props.e.constructor.name.toLowerCase() !== 'axioserror') {
       console.log('************** API LOG **************');
+      console.log(
+        `${props.nameFunction}`,
+        props.tags,
+        isError,
+        'url :',
+        url,
+        '\n',
+      );
+      console.log(
+        `${props.nameFunction}`,
+        props.tags,
+        isError,
+        'body :',
+        body,
+        '\n',
+      );
       console.log(
         `${props.nameFunction} `,
         props.tags,
@@ -15,12 +37,6 @@ const logApi = (props: ApiLog) => {
       console.log('************** API LOG **************');
       return;
     }
-
-    let url = '';
-    let statusCode: any = 0;
-    let body = JSON.stringify(props.body || '');
-    let data = '';
-    let isError = props.e ? 'error' : '';
 
     if (isError) {
       url = props.e?.request?._url || '';

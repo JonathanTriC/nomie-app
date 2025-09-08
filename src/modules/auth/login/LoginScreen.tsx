@@ -1,14 +1,24 @@
 import { Text } from '@components/text';
 import { Colors, screenWidth } from '@constants';
-import { TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import RadialGradient from 'react-native-radial-gradient';
 import useLogin from './useLogin';
 import { styles } from './styles';
 import { Button, TextField } from '@components';
+import { Icon } from 'react-native-paper';
+import { Controller } from 'react-hook-form';
 
 const LoginScreen: React.FC = () => {
-  const { userEmail, popScreen, handleNavigateRegister } = useLogin();
+  const {
+    userEmail,
+    control,
+    isPending,
+    popScreen,
+    handleNavigateRegister,
+    handleSubmit,
+    onSubmit,
+  } = useLogin();
 
   return (
     <View style={styles.screen}>
@@ -30,7 +40,7 @@ const LoginScreen: React.FC = () => {
             style={styles.backComponent}
             onPress={() => popScreen(2)}
           >
-            <Text text="<" />
+            <Icon source={'arrow-back'} size={16} />
           </TouchableOpacity>
 
           <View style={styles.titleComponent}>
@@ -47,20 +57,52 @@ const LoginScreen: React.FC = () => {
           </View>
 
           <View style={styles.formComponent}>
-            <TextField
-              label="Email Address"
-              placeholder="Input your email here"
-              value={userEmail}
-              disabled={userEmail}
-              onChangeText={() => {}}
+            <Controller
+              control={control}
+              name={'email'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  required
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  disabled={userEmail}
+                  leftIcon={'mail'}
+                  label="Email Address"
+                  placeholder="Input your email here"
+                  returnKeyType="done"
+                  keyboardType="email-address"
+                  errorMessage={error?.message}
+                />
+              )}
             />
-            <TextField
-              label="Password"
-              placeholder="Input your password here"
-              value={''}
-              onChangeText={() => {}}
-              secure
+
+            <Controller
+              control={control}
+              name={'password'}
+              render={({
+                field: { value, onChange, onBlur },
+                fieldState: { error },
+              }) => (
+                <TextField
+                  required
+                  secure
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  leftIcon={'lock'}
+                  label="Password"
+                  placeholder="Input your password here"
+                  returnKeyType="done"
+                  keyboardType="email-address"
+                  errorMessage={error?.message}
+                />
+              )}
             />
+
             <TouchableOpacity>
               <Text
                 text="Forgot password?"
@@ -71,7 +113,13 @@ const LoginScreen: React.FC = () => {
             </TouchableOpacity>
           </View>
 
-          <Button label="Login" style={styles.btnLoginComponent} />
+          <Button
+            label="Login"
+            style={styles.btnLoginComponent}
+            action={handleSubmit(onSubmit)}
+          >
+            {isPending && <ActivityIndicator color={Colors.white} />}
+          </Button>
         </View>
 
         <View style={styles.registerComponent}>

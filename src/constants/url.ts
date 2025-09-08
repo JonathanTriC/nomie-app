@@ -7,6 +7,11 @@ export const MISC_PREFIX = 'misc';
 
 export const URL_PATH = {
   // MARK: AUTH
+  auth_refresh_token: `${API_VERSION}/${AUTH_PREFIX}/refresh-token`,
   auth_check_email: `${API_VERSION}/${AUTH_PREFIX}/check-email`,
   auth_login: `${API_VERSION}/${AUTH_PREFIX}/login`,
+  auth_register: `${API_VERSION}/${AUTH_PREFIX}/register`,
+
+  // MARK: USER
+  user_get_profile: `${API_VERSION}/${USER_PREFIX}/profile`,
 };

@@ -1,3 +1,4 @@
+import { handlerGetItem, Keys } from '@constants';
 import { BASE_URL } from '@constants/url';
 import axios, { CreateAxiosDefaults } from 'axios';
 
@@ -13,7 +14,7 @@ const baseConfig: CreateAxiosDefaults<any> = {
 const client = axios.create(baseConfig);
 client.interceptors.request.use(async function (config) {
   if (!config.headers.Authorization) {
-    const token = '';
+    const token = await handlerGetItem(Keys.userToken);
 
     if (token) {
       config.headers.Authorization = 'Bearer ' + token;

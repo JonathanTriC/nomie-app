@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     lineHeight: 16,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Jost-Regular',
   },
   successHelperText: {
     marginTop: 4,
@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     lineHeight: 16,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Jost-Regular',
   },
   subLabel: {
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Jost-Regular',
     color: Colors.white,
     fontSize: 12,
     marginTop: 8,

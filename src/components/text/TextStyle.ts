@@ -1,9 +1,9 @@
 import { TextMap } from './TextType';
 
 export const FONT_FAMILY = {
-  light: 'Mulish-Light',
-  regular: 'Mulish-Regular',
-  bold: 'Mulish-Bold',
+  light: 'Jost-Light',
+  regular: 'Jost-Regular',
+  bold: 'Jost-Bold',
 };
 
 export const fontFamily: TextMap<string> = {
