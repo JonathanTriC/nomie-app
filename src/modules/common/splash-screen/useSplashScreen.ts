@@ -1,24 +1,63 @@
+import { apiPost } from '@api';
+import {
+  handlerGetItem,
+  handlerRemoveItem,
+  handlerSetItem,
+  Keys,
+  URL_PATH,
+} from '@constants';
 import { useNavigate } from '@hooks/navigation-hooks';
+import { useMutation } from '@tanstack/react-query';
 import { useCallback, useEffect } from 'react';
 
 const useSplashScreen = () => {
   const { resetNavigate } = useNavigate();
 
-  const checkIsUserLoggedIn = useCallback(() => {
-    // let user = firebase.auth().currentUser?.uid;
-    // if (user) {
-    //   navigation.reset({index: 0, routes: [{name: 'BottomTabNavigator'}]});
-    // } else {
-    //   navigation.reset({index: 0, routes: [{name: 'LoginScreen'}]});
-    // }
-    setTimeout(() => {
-      resetNavigate('LoginScreen');
-    }, 1000);
-  }, [resetNavigate]);
+  const userToken = handlerGetItem(Keys.userToken);
+
+  const { mutate: submitRefreshToken } = useMutation<
+    RefreshTokenResponse,
+    ApiError
+  >({
+    mutationKey: ['refresh-token'],
+    mutationFn: async () => {
+      const data = await apiPost({
+        url: `${URL_PATH.auth_refresh_token}`,
+        body: {
+          refresh_token: userToken ?? '',
+        },
+      });
+
+      return data;
+    },
+    onSettled: async data => {
+      console.log('Refresh Token on settled:', data);
+      const token = data?.access_token ?? '';
+      checkIsUserLoggedIn(token);
+    },
+  });
+
+  const checkIsUserLoggedIn = useCallback(
+    async (token: string) => {
+      await handlerSetItem(Keys.userToken, token);
+      if (token) {
+        setTimeout(() => {
+          resetNavigate('HomeScreen');
+        }, 1000);
+      } else {
+        await handlerRemoveItem(Keys.userToken);
+        await handlerRemoveItem(Keys.userInfo);
+        setTimeout(() => {
+          resetNavigate('OnboardingScreen');
+        }, 1000);
+      }
+    },
+    [resetNavigate],
+  );
 
   useEffect(() => {
-    checkIsUserLoggedIn();
-  }, [checkIsUserLoggedIn]);
+    submitRefreshToken();
+  }, [submitRefreshToken]);
 
   return {};
 };

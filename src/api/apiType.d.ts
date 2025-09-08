@@ -26,3 +26,10 @@ interface GenerateCurlProps {
   tags: string;
   isError?: string;
 }
+
+type ApiError = {
+  message: {
+    error: string;
+    form_key?: string;
+  };
+};
