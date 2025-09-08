@@ -30,7 +30,15 @@ const LoginScreen: React.FC = () => {
   return (
     <View>
       <TouchableOpacity onPress={() => submitLogin.mutate()}>
-        <Text>{submitLogin.isPending ? 'Logging in...' : 'Login'}</Text>
+        <Text
+          style={{
+            fontFamily: 'Jost-Regular',
+          }}
+        >
+          {submitLogin.isPending
+            ? 'Logging in...'
+            : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
