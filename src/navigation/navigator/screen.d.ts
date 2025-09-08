@@ -8,7 +8,11 @@ interface RegisterScreenParams {
   isFromOnboarding: boolean;
 }
 
+interface BottomTabBarParams {}
 interface HomeScreenParams {}
+interface SearchScreenParams {}
+interface FavouritesScreenParams {}
+interface ProfileScreenParams {}
 
 type ParamList = {
   SplashScreen: SplashScreenParams;
@@ -19,5 +23,9 @@ type ParamList = {
   RegisterScreen: RegisterScreenParams;
 
   // MARK: Main Modules
+  BottomTabBar: BottomTabBarParams;
   HomeScreen: HomeScreenParams;
+  SearchScreen: SearchScreenParams;
+  FavouritesScreen: FavouritesScreenParams;
+  ProfileScreen: ProfileScreenParams;
 };

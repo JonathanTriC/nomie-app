@@ -2482,6 +2482,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/bottom-tabs@npm:^7.4.7":
+  version: 7.4.7
+  resolution: "@react-navigation/bottom-tabs@npm:7.4.7"
+  dependencies:
+    "@react-navigation/elements": ^2.6.4
+    color: ^4.2.3
+  peerDependencies:
+    "@react-navigation/native": ^7.1.17
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-screens: ">= 4.0.0"
+  checksum: 9ff291b086b00d4f656d67fd29b084c7d801c68e8db41c3b18192076d9593e6d4c9d4d28d1bde12be71c0499b6af83331cbe348549c15ff5fa5f8daf42c6bae3
+  languageName: node
+  linkType: hard
+
 "@react-navigation/core@npm:^7.12.4":
   version: 7.12.4
   resolution: "@react-navigation/core@npm:7.12.4"
@@ -2516,6 +2532,26 @@ __metadata:
     "@react-native-masked-view/masked-view":
       optional: true
   checksum: e676f1dfed37eca5275d982e2a060ba224ae5c495b6204c6753b34d90b32227093a945ce11ed82c16001dadbcade49474047188c6df9533c61f88dd5dd038c3f
+  languageName: node
+  linkType: hard
+
+"@react-navigation/elements@npm:^2.6.4":
+  version: 2.6.4
+  resolution: "@react-navigation/elements@npm:2.6.4"
+  dependencies:
+    color: ^4.2.3
+    use-latest-callback: ^0.2.4
+    use-sync-external-store: ^1.5.0
+  peerDependencies:
+    "@react-native-masked-view/masked-view": ">= 0.2.0"
+    "@react-navigation/native": ^7.1.17
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+  peerDependenciesMeta:
+    "@react-native-masked-view/masked-view":
+      optional: true
+  checksum: 5ebcf77ca85755efbc35983a32caf6f82371bd8ca7ba705deb4317c250a9a9c1898765d02fe2373adfb2aae852666ac54f07b9185bf1a91fbfe185920ac9c46d
   languageName: node
   linkType: hard
 
@@ -2739,6 +2775,25 @@ __metadata:
   dependencies:
     undici-types: ~7.10.0
   checksum: f5abd0c74312e758711a51ab26858426a2fc6de4576d930759aa645b530db354116049497d0a20ed504ddfc6c3b85dee9253b9bae42be19f1a788c18393123e6
+  languageName: node
+  linkType: hard
+
+"@types/react-native-vector-icons@npm:^6.4.18":
+  version: 6.4.18
+  resolution: "@types/react-native-vector-icons@npm:6.4.18"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-native": ^0.70
+  checksum: 1ef458cb5e7a37f41eb400e3153940b1b152e4df76a7c06c7a47c712dbfe46e14b9999f04dde1bd074f338f850e161c6c925174ddea33386b74f8112c940065b
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:^0.70":
+  version: 0.70.19
+  resolution: "@types/react-native@npm:0.70.19"
+  dependencies:
+    "@types/react": "*"
+  checksum: 79b504fa56340631079e7c20ea0d9412ec14147b76d0ce189f4403936f529ef1e6fd031383afab117846c5ae039123bcf3afc948bae4432269c6780282726f71
   languageName: node
   linkType: hard
 
@@ -3011,11 +3066,13 @@ __metadata:
     "@react-native/metro-config": 0.80.2
     "@react-native/new-app-screen": 0.80.2
     "@react-native/typescript-config": 0.80.2
+    "@react-navigation/bottom-tabs": ^7.4.7
     "@react-navigation/native": ^7.1.17
     "@react-navigation/stack": ^7.4.7
     "@tanstack/react-query": ^5.85.5
     "@types/jest": ^29.5.13
     "@types/react": ^19.1.0
+    "@types/react-native-vector-icons": ^6.4.18
     "@types/react-test-renderer": ^19.1.0
     axios: ^1.11.0
     babel-plugin-module-resolver: ^5.0.2
@@ -3034,12 +3091,12 @@ __metadata:
     react-native-modal: ^14.0.0-rc.1
     react-native-paper: ^5.14.5
     react-native-radial-gradient: ^1.2.1
-    react-native-reanimated: ^4.0.2
+    react-native-reanimated: ^4.1.0
     react-native-safe-area-context: ^5.6.0
     react-native-screens: ^4.14.1
     react-native-splash-screen: ^3.3.0
     react-native-vector-icons: ^10.3.0
-    react-native-worklets: 0.4.0
+    react-native-worklets: latest
     react-test-renderer: 19.1.0
     reactotron-react-native: ^5.1.15
     typescript: 5.0.4
@@ -8280,9 +8337,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "react-native-reanimated@npm:4.0.2"
+"react-native-reanimated@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "react-native-reanimated@npm:4.1.0"
   dependencies:
     react-native-is-edge-to-edge: ^1.2.1
     semver: 7.7.2
@@ -8290,8 +8347,8 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-    react-native-worklets: ">=0.4.0"
-  checksum: 8394194df230d2173bc08e2208946c5bc6bd0715831a82a7826edd07a071c681808fae305e50e80d3258eb0f1d3268c1ac4eb692fefaf48f8e803dc4555119bc
+    react-native-worklets: ">=0.5.0"
+  checksum: 72ef1ff148f49bc1d60f772e2969c4583ef98262eccd5bfbcc6dfb9ff8a556d2ec6ad784bf06266d61bc0c4689fc8e928605a038851b077b0e554e3b5565fbe2
   languageName: node
   linkType: hard
 
@@ -8343,9 +8400,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-worklets@npm:0.4.0":
-  version: 0.4.0
-  resolution: "react-native-worklets@npm:0.4.0"
+"react-native-worklets@npm:latest":
+  version: 0.5.0
+  resolution: "react-native-worklets@npm:0.5.0"
   dependencies:
     "@babel/plugin-transform-arrow-functions": ^7.0.0-0
     "@babel/plugin-transform-class-properties": ^7.0.0-0
@@ -8357,11 +8414,12 @@ __metadata:
     "@babel/plugin-transform-unicode-regex": ^7.0.0-0
     "@babel/preset-typescript": ^7.16.7
     convert-source-map: ^2.0.0
+    semver: 7.7.2
   peerDependencies:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 4b338be8b17dbb974980f318278d72bb0b579d7f1d48f5197c8af0f0d634a7eba0e8d6b9840d38b9a444919ba0adc68b7b98c48f4f7dcdc83d0bb4ada5fe8e7d
+  checksum: 31dc943e210d917ed6443e28ac88cb595800ebba581ad452a687956056fcb22f9984576417d195744a4cfea1ea83d0364f1d2dd8d094ecb9ff4760ccf31422ee
   languageName: node
   linkType: hard
 

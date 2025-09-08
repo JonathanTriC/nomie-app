@@ -97,7 +97,7 @@ const useLogin = () => {
       await handlerSetItem(Keys.userToken, token);
       await handleGetUserProfile();
 
-      resetNavigate('HomeScreen');
+      resetNavigate('BottomTabBar');
     },
     [handleGetUserProfile, resetNavigate],
   );

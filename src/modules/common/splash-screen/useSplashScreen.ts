@@ -42,7 +42,7 @@ const useSplashScreen = () => {
       await handlerSetItem(Keys.userToken, token);
       if (token) {
         setTimeout(() => {
-          resetNavigate('HomeScreen');
+          resetNavigate('BottomTabBar');
         }, 1000);
       } else {
         await handlerRemoveItem(Keys.userToken);
