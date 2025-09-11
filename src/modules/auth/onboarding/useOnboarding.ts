@@ -32,7 +32,7 @@ const useOnboarding = () => {
       mutationKey: ['check-email'],
       mutationFn: async () => {
         const data = await apiPostWithoutToken({
-          url: `${URL_PATH.auth_check_email}`,
+          url: `${URL_PATH.auth.check_email}`,
           body: {
             email: email,
           },

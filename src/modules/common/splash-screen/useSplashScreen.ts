@@ -7,12 +7,14 @@ import {
   URL_PATH,
 } from '@constants';
 import { useNavigate } from '@hooks/navigation-hooks';
+import { useUserStore } from '@stores';
 import { useMutation } from '@tanstack/react-query';
 import { useCallback, useEffect } from 'react';
 
 const useSplashScreen = () => {
   const { resetNavigate } = useNavigate();
 
+  const clearUserProfile = useUserStore(state => state.clearUserProfile);
   const userToken = handlerGetItem(Keys.userToken);
 
   const { mutate: submitRefreshToken } = useMutation<
@@ -22,7 +24,7 @@ const useSplashScreen = () => {
     mutationKey: ['refresh-token'],
     mutationFn: async () => {
       const data = await apiPost({
-        url: `${URL_PATH.auth_refresh_token}`,
+        url: `${URL_PATH.auth.refresh_token}`,
         body: {
           refresh_token: userToken ?? '',
         },
@@ -46,13 +48,13 @@ const useSplashScreen = () => {
         }, 1000);
       } else {
         await handlerRemoveItem(Keys.userToken);
-        await handlerRemoveItem(Keys.userInfo);
+        clearUserProfile();
         setTimeout(() => {
           resetNavigate('OnboardingScreen');
         }, 1000);
       }
     },
-    [resetNavigate],
+    [resetNavigate, clearUserProfile],
   );
 
   useEffect(() => {

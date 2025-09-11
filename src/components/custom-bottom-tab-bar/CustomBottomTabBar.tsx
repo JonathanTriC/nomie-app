@@ -20,10 +20,10 @@ const CustomBottomTabBar: React.FC<BottomTabBarProps> = ({
   const getIconByRouteName = (routeName: string, color: string) => {
     switch (routeName?.toLowerCase()) {
       case 'home':
-        return <Icon source={'home'} size={18} color={color} />;
-      case 'search':
+        return <Icon source={'home-filled'} size={18} color={color} />;
+      case 'explore':
         return <Icon source={'explore'} size={18} color={color} />;
-      case 'favourites':
+      case 'favorite':
         return <Icon source={'favorite'} size={18} color={color} />;
       case 'profile':
         return <Icon source={'person'} size={18} color={color} />;

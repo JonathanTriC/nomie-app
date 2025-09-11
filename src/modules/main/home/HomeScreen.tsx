@@ -1,44 +1,170 @@
-import { Text } from '@components';
-import { handlerGetAndParseJSON, handlerRemoveItem, Keys } from '@constants';
-import { useNavigate } from '@hooks';
-import { TouchableOpacity, View } from 'react-native';
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+import { SkeletonLoading, Text } from '@components';
+import { FlatList, ScrollView, TouchableOpacity, View } from 'react-native';
+import useHomeScreen from './useHomeScreen';
+import { styles } from './styles';
+import { Colors, screenWidth } from '@constants';
+import { Icon } from 'react-native-paper';
+import FastImage from 'react-native-fast-image';
 
 const HomeScreen: React.FC = () => {
-  const { resetNavigate } = useNavigate();
-  const userInfo = handlerGetAndParseJSON<GetProfileResponse>(Keys.userInfo);
-  const width = useSharedValue(100);
-  const handlePress = () => {
-    width.value = withSpring(width.value + 50);
+  const {
+    userProfile,
+    todayRecommendation,
+    isLoadingTodayRecommendation,
+    popularPicks,
+    isLoadingPopularPicks,
+    cuisinePicks,
+    isLoadingCuisinePicks,
+  } = useHomeScreen();
+
+  const cardsItem = (item: PopularPicksItem) => {
+    return (
+      <View key={item?.mealId} style={styles.mealCards}>
+        <FastImage
+          source={{ uri: item?.mealThumbImage }}
+          style={styles.mealImg}
+          resizeMode="cover"
+        />
+        <View style={[styles.favoriteIcon, styles.favoriteIconPosition]}>
+          <Icon source={'favorite-border'} size={18} />
+        </View>
+        <Text
+          text={item?.mealName}
+          type="regular-base"
+          color={Colors.neutral.base}
+          numberOfLines={2}
+        />
+      </View>
+    );
+  };
+
+  const renderHorizontalSkeleton = () => {
+    return (
+      <View style={styles.horizontalSkeleton}>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <SkeletonLoading
+            key={index}
+            height={172}
+            width={154}
+            borderRadius={12}
+          />
+        ))}
+      </View>
+    );
   };
 
   return (
-    <View>
-      <Text text="Home Screen" />
-      <Text text={userInfo?.email} />
+    <ScrollView
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.rowBetween}>
+        <View style={styles.gap6}>
+          <Text
+            text={`Hello ${userProfile?.fullname},`}
+            type="regular-base"
+            color={Colors.neutral.n300}
+          />
+          <Text
+            text="What you want to eat today?"
+            type="bold-xl"
+            color={Colors.neutral.base}
+          />
+        </View>
 
-      <Animated.View
-        style={{
-          width,
-          height: 100,
-          backgroundColor: 'violet',
-        }}
-      />
+        <FastImage
+          source={{ uri: userProfile?.avatar }}
+          style={styles.avatarImg}
+        />
+      </View>
 
-      <TouchableOpacity onPress={handlePress}>
-        <Text text="animate" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={async () => {
-          await handlerRemoveItem(Keys.userToken);
-          await handlerRemoveItem(Keys.userInfo);
+      {isLoadingTodayRecommendation ? (
+        <SkeletonLoading height={280} borderRadius={12} />
+      ) : (
+        <View style={styles.gap8}>
+          <Text
+            text="Chef’s Pick of the Day"
+            type="bold-lg"
+            color={Colors.neutral.base}
+          />
+          <View style={styles.todayRecommendationCards}>
+            <FastImage
+              source={{ uri: todayRecommendation?.mealThumbImage }}
+              style={styles.todayRecommendationImg}
+              resizeMode="cover"
+            />
+            <View style={styles.todayRecommendationDetail}>
+              <View style={[styles.gap6, { width: screenWidth - 120 }]}>
+                <Text
+                  text={todayRecommendation?.mealName}
+                  type="bold-lg"
+                  color={Colors.neutral.base}
+                  numberOfLines={1}
+                />
+                <Text
+                  text={`${todayRecommendation?.mealArea} - ${todayRecommendation?.mealCategory}`}
+                  type="regular-base"
+                  color={Colors.neutral.n300}
+                />
+              </View>
 
-          resetNavigate('OnboardingScreen');
-        }}
-      >
-        <Text text="logout" />
-      </TouchableOpacity>
-    </View>
+              <View style={styles.favoriteIcon}>
+                <Icon source={'favorite-border'} size={18} />
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
+
+      {isLoadingPopularPicks ? (
+        renderHorizontalSkeleton()
+      ) : (
+        <View style={styles.gap8}>
+          <View style={styles.rowBetween}>
+            <Text
+              text={`Tasty ${popularPicks?.categoryName} Dishes Everyone Loves`}
+              type="bold-lg"
+              color={Colors.neutral.base}
+            />
+            <TouchableOpacity>
+              <Icon source={'chevron-right'} size={20} />
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={popularPicks?.meals}
+            contentContainerStyle={styles.gap12}
+            renderItem={({ item }) => cardsItem(item)}
+          />
+        </View>
+      )}
+
+      {isLoadingCuisinePicks ? (
+        renderHorizontalSkeleton()
+      ) : (
+        <View style={styles.gap8}>
+          <View style={styles.rowBetween}>
+            <Text
+              text={`Straight from ${cuisinePicks?.areaName} Kitchen`}
+              type="bold-lg"
+              color={Colors.neutral.base}
+            />
+            <TouchableOpacity>
+              <Icon source={'chevron-right'} size={20} />
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={cuisinePicks?.meals}
+            contentContainerStyle={styles.gap12}
+            renderItem={({ item }) => cardsItem(item)}
+          />
+        </View>
+      )}
+      <View style={styles.height50} />
+    </ScrollView>
   );
 };
 

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.neutral.n50,
     width: '90%',
     alignSelf: 'center',
-    bottom: 40,
+    bottom: 30,
     borderRadius: 40,
     paddingHorizontal: 12,
     paddingVertical: 15,
@@ -28,8 +28,9 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
   },
   text: {
-    color: Colors.neutral.n50,
     marginLeft: 8,
-    fontWeight: '500',
+    color: Colors.neutral.n50,
+    fontWeight: '400',
+    fontFamily: 'Jost-Regular',
   },
 });

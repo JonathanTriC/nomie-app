@@ -19,7 +19,9 @@
       "@modules": ["src/modules"],
       "@modules/*": ["src/modules/*"],
       "@navigation": ["src/navigation"],
-      "@navigation/*": ["src/navigation/*"]
+      "@navigation/*": ["src/navigation/*"],
+      "@stores": ["src/stores"],
+      "@stores/*": ["src/stores/*"]
     }
   }
 }
