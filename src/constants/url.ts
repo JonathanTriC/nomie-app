@@ -108,6 +108,7 @@ export const URL_PATH = {
         queryString ? `?${queryString}` : ''
       }`;
     },
+    favourites: `${API_VERSION}/${MEALS_PREFIX}/favourites`,
   },
 
   // MARK: Misc

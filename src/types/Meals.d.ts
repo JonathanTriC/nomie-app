@@ -54,3 +54,13 @@ type SearchMealsData = {
   totalItems: number;
   totalPages: number;
 };
+
+type FavoriteMealsData = {
+  favourites: FavoriteMealsItem[];
+};
+
+type FavoriteMealsItem = {
+  mealId: string;
+  mealName: string;
+  mealThumbImage: string;
+};
