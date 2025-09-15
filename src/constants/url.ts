@@ -46,5 +46,33 @@ export const URL_PATH = {
         queryString ? `?${queryString}` : ''
       }`;
     },
+    search_meals: ({
+      query,
+      limit,
+      page,
+    }: {
+      query?: string;
+      limit?: number;
+      page?: number;
+    }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+      const search = (query ?? '').replace(' ', '+');
+      const searchTxt = encodeURIComponent(search);
+
+      return `${API_VERSION}/${MEALS_PREFIX}/search/${searchTxt}${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+  },
+
+  // MARK: Misc
+  misc: {
+    category: `${API_VERSION}/${MISC_PREFIX}/category`,
+    area: `${API_VERSION}/${MISC_PREFIX}/area`,
   },
 };

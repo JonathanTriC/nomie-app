@@ -6,6 +6,13 @@ import { Colors, screenWidth } from '@constants';
 import { Icon } from 'react-native-paper';
 import FastImage from 'react-native-fast-image';
 
+interface RenderHomeItemProps<T extends any[]> {
+  isLoading: boolean;
+  isError: boolean;
+  label: string;
+  data: T | undefined;
+}
+
 const HomeScreen: React.FC = () => {
   const {
     userProfile,
@@ -13,8 +20,10 @@ const HomeScreen: React.FC = () => {
     isLoadingTodayRecommendation,
     popularPicks,
     isLoadingPopularPicks,
+    isErrorPopularPicks,
     cuisinePicks,
     isLoadingCuisinePicks,
+    isErrorCuisinePicks,
   } = useHomeScreen();
 
   const cardsItem = (item: PopularPicksItem) => {
@@ -49,6 +58,37 @@ const HomeScreen: React.FC = () => {
             borderRadius={12}
           />
         ))}
+      </View>
+    );
+  };
+
+  const renderHomeItemComponent = <T extends any[]>({
+    isLoading,
+    isError,
+    label,
+    data,
+  }: RenderHomeItemProps<T>) => {
+    if (isLoading) {
+      return renderHorizontalSkeleton();
+    }
+    if (isError) {
+      return null;
+    }
+    return (
+      <View style={styles.gap8}>
+        <View style={styles.rowBetween}>
+          <Text text={label} type="bold-lg" color={Colors.neutral.base} />
+          <TouchableOpacity>
+            <Icon source={'chevron-right'} size={20} />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          contentContainerStyle={styles.gap12}
+          renderItem={({ item }) => cardsItem(item)}
+        />
       </View>
     );
   };
@@ -116,53 +156,20 @@ const HomeScreen: React.FC = () => {
         </View>
       )}
 
-      {isLoadingPopularPicks ? (
-        renderHorizontalSkeleton()
-      ) : (
-        <View style={styles.gap8}>
-          <View style={styles.rowBetween}>
-            <Text
-              text={`Tasty ${popularPicks?.categoryName} Dishes Everyone Loves`}
-              type="bold-lg"
-              color={Colors.neutral.base}
-            />
-            <TouchableOpacity>
-              <Icon source={'chevron-right'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={popularPicks?.meals}
-            contentContainerStyle={styles.gap12}
-            renderItem={({ item }) => cardsItem(item)}
-          />
-        </View>
-      )}
+      {renderHomeItemComponent({
+        isLoading: isLoadingPopularPicks,
+        isError: isErrorPopularPicks,
+        label: `Tasty ${popularPicks?.categoryName} Dishes Everyone Loves`,
+        data: popularPicks?.meals,
+      })}
 
-      {isLoadingCuisinePicks ? (
-        renderHorizontalSkeleton()
-      ) : (
-        <View style={styles.gap8}>
-          <View style={styles.rowBetween}>
-            <Text
-              text={`Straight from ${cuisinePicks?.areaName} Kitchen`}
-              type="bold-lg"
-              color={Colors.neutral.base}
-            />
-            <TouchableOpacity>
-              <Icon source={'chevron-right'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={cuisinePicks?.meals}
-            contentContainerStyle={styles.gap12}
-            renderItem={({ item }) => cardsItem(item)}
-          />
-        </View>
-      )}
+      {renderHomeItemComponent({
+        isLoading: isLoadingCuisinePicks,
+        isError: isErrorCuisinePicks,
+        label: `Straight from ${cuisinePicks?.areaName} Kitchen`,
+        data: cuisinePicks?.meals,
+      })}
+
       <View style={styles.height50} />
     </ScrollView>
   );

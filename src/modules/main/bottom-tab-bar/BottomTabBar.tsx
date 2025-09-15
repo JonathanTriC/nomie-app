@@ -17,7 +17,7 @@ const BottomTabBar: React.FC = () => {
       tabBar={props => <CustomBottomTabBar {...props} />}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Explore" component={SearchScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Favorite" component={FavouritesScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

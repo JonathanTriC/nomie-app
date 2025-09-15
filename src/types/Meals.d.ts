@@ -47,3 +47,10 @@ type PopularPicksItem = {
   mealName: string;
   mealThumbImage: string;
 };
+
+type SearchMealsData = {
+  meals: PopularPicksItem[];
+  page: number;
+  totalItems: number;
+  totalPages: number;
+};
