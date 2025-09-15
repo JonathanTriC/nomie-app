@@ -4,3 +4,4 @@ export * from './button';
 export * from './bottom-modal';
 export * from './custom-bottom-tab-bar';
 export * from './skeleton-loading';
+export * from './header';

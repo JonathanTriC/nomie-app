@@ -23,6 +23,7 @@ const SearchScreen: React.FC = () => {
     expandedType,
     toggleAccordion,
     loadNextPageData,
+    onSearchByCategory,
   } = useSearchScreen();
 
   const renderSearchItem = (item: PopularPicksItem) => {
@@ -143,7 +144,15 @@ const SearchScreen: React.FC = () => {
                   columnWrapperStyle={[styles.spaceBetween, styles.gap8]}
                   renderItem={({ item }) => {
                     return (
-                      <TouchableOpacity style={styles.cardItemContainer}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          onSearchByCategory({
+                            type: 'category',
+                            query: item,
+                          })
+                        }
+                        style={styles.cardItemContainer}
+                      >
                         <Text text={item} type="bold-base" />
                       </TouchableOpacity>
                     );
@@ -180,7 +189,15 @@ const SearchScreen: React.FC = () => {
                   columnWrapperStyle={[styles.spaceBetween, styles.gap8]}
                   renderItem={({ item }) => {
                     return (
-                      <TouchableOpacity style={styles.cardItemContainer}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          onSearchByCategory({
+                            type: 'area',
+                            query: item?.name,
+                          })
+                        }
+                        style={styles.cardItemContainer}
+                      >
                         <FastImage
                           source={{ uri: item?.imageUrl }}
                           style={styles.itemImg}

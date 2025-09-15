@@ -5,6 +5,7 @@ import {
   FavouritesScreen,
   HomeScreen,
   LoginScreen,
+  MealsCategoryScreen,
   OnBoardingScreen,
   ProfileScreen,
   RegisterScreen,
@@ -39,6 +40,12 @@ export const Navigator: React.FC<NavigatorProps> = () => {
       <Stack.Screen name={'SearchScreen'} component={SearchScreen} />
       <Stack.Screen name={'FavouritesScreen'} component={FavouritesScreen} />
       <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
+
+      {/* //MARK: Meals Modules */}
+      <Stack.Screen
+        name={'MealsCategoryScreen'}
+        component={MealsCategoryScreen}
+      />
     </Stack.Navigator>
   );
 };

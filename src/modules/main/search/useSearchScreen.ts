@@ -1,6 +1,7 @@
 import { apiGet } from '@api';
 import { URL_PATH } from '@constants';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from '@hooks';
 import {
   keepPreviousData,
   useInfiniteQuery,
@@ -17,6 +18,7 @@ const formSchema = yup.object({
 type FormData = yup.InferType<typeof formSchema>;
 
 const useSearchScreen = () => {
+  const { navigateScreen } = useNavigate();
   const [expandedType, setExpandedType] = useState<string | null>(null);
 
   const toggleAccordion = useCallback((type: string) => {
@@ -65,9 +67,7 @@ const useSearchScreen = () => {
     isLoading: isLoadingSearch,
   } = useInfiniteQuery<SearchMealsData>({
     queryKey: ['search-meals', debouncedSearchTxt],
-
     queryFn: async ({ pageParam }) => {
-      console.log('🚀 ~ useSearchScreen ~ pageParam:', pageParam);
       const res = await apiGet({
         url: URL_PATH.meals.search_meals({
           query: debouncedSearchTxt ?? '',
@@ -81,19 +81,29 @@ const useSearchScreen = () => {
     getNextPageParam: (lastPage: SearchMealsData) => {
       const nextPage =
         lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined;
-      console.log('🚀 ~ useSearchScreen ~ nextPage:', nextPage);
       return nextPage;
     },
-
     enabled: debouncedSearchTxt?.length > 1,
     retry: false,
   });
 
   const loadNextPageData = () => {
-    console.log('load next page');
     if (hasNextPage) {
       fetchNextPage();
     }
+  };
+
+  const onSearchByCategory = ({
+    type,
+    query,
+  }: {
+    type: 'category' | 'area';
+    query: string;
+  }) => {
+    return navigateScreen<MealsCategoryScreenParams>('MealsCategoryScreen', {
+      type,
+      query,
+    });
   };
 
   const { data: categoryList, isLoading: isLoadingCategoryList } =
@@ -127,6 +137,7 @@ const useSearchScreen = () => {
     toggleAccordion,
     fetchNextPage,
     loadNextPageData,
+    onSearchByCategory,
   };
 };
 

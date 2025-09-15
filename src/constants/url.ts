@@ -68,6 +68,46 @@ export const URL_PATH = {
         queryString ? `?${queryString}` : ''
       }`;
     },
+    meals_category: ({
+      query,
+      limit,
+      page,
+    }: {
+      query?: string;
+      limit?: number;
+      page?: number;
+    }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/category/${query}${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+    meals_area: ({
+      query,
+      limit,
+      page,
+    }: {
+      query?: string;
+      limit?: number;
+      page?: number;
+    }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/area/${query}${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
   },
 
   // MARK: Misc

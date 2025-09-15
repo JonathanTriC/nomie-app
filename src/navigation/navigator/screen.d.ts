@@ -14,6 +14,11 @@ interface SearchScreenParams {}
 interface FavouritesScreenParams {}
 interface ProfileScreenParams {}
 
+interface MealsCategoryScreenParams {
+  type: 'category' | 'area';
+  query: string;
+}
+
 type ParamList = {
   SplashScreen: SplashScreenParams;
 
@@ -28,4 +33,7 @@ type ParamList = {
   SearchScreen: SearchScreenParams;
   FavouritesScreen: FavouritesScreenParams;
   ProfileScreen: ProfileScreenParams;
+
+  // MARK: Main Modules
+  MealsCategoryScreen: MealsCategoryScreenParams;
 };
