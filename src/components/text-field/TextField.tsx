@@ -116,7 +116,7 @@ const TextField: FC<TextFieldProps> = ({
         marginTop: top,
         marginBottom: bottom,
         gap: 8,
-        width: screenWidth - 32,
+        width: screenWidth - 40,
       }}
     >
       {label && (

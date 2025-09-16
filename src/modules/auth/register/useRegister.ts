@@ -67,7 +67,7 @@ const useRegister = () => {
       formData.append('password', password?.trim());
 
       const data = await apiPostWithoutToken({
-        url: `${URL_PATH.auth_register}`,
+        url: `${URL_PATH.auth.register}`,
         body: formData,
       });
 

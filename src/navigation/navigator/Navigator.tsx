@@ -1,10 +1,15 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigator } from './useNavigator';
 import {
+  BottomTabBar,
+  FavouritesScreen,
   HomeScreen,
   LoginScreen,
+  MealsCategoryScreen,
   OnBoardingScreen,
+  ProfileScreen,
   RegisterScreen,
+  SearchScreen,
   SplashScreen,
 } from '@modules';
 
@@ -30,7 +35,17 @@ export const Navigator: React.FC<NavigatorProps> = () => {
       <Stack.Screen name={'RegisterScreen'} component={RegisterScreen} />
 
       {/* //MARK: Main Modules */}
+      <Stack.Screen name={'BottomTabBar'} component={BottomTabBar} />
       <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
+      <Stack.Screen name={'SearchScreen'} component={SearchScreen} />
+      <Stack.Screen name={'FavouritesScreen'} component={FavouritesScreen} />
+      <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
+
+      {/* //MARK: Meals Modules */}
+      <Stack.Screen
+        name={'MealsCategoryScreen'}
+        component={MealsCategoryScreen}
+      />
     </Stack.Navigator>
   );
 };

@@ -1,5 +1,7 @@
 type RefreshTokenResponse = {
-  access_token?: string;
+  expires_in?: number;
+  token?: string;
+  token_type?: string;
 };
 
 type CheckEmailResponse = {

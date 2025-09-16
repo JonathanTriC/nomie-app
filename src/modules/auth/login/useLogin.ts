@@ -6,6 +6,7 @@ import { useCallback } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useUserStore } from '@stores';
 
 const formSchema = yup.object().shape({
   email: yup
@@ -27,6 +28,8 @@ const useLogin = () => {
   } = useNavigate();
   const { userEmail } = getRouteParams<LoginScreenParams>();
 
+  const setUserProfile = useUserStore(state => state.setUserProfile);
+
   const { control, getValues, handleSubmit, setError } = useForm<FormData>({
     defaultValues: {
       email: userEmail,
@@ -44,7 +47,7 @@ const useLogin = () => {
       const { email, password } = getValues();
 
       const data = await apiPostWithoutToken({
-        url: `${URL_PATH.auth_login}`,
+        url: `${URL_PATH.auth.login}`,
         body: {
           email,
           password,
@@ -70,7 +73,7 @@ const useLogin = () => {
     queryKey: ['getProfile'],
     queryFn: async () => {
       const data = await apiGet({
-        url: `${URL_PATH.user_get_profile}`,
+        url: `${URL_PATH.user.get_profile}`,
       });
 
       return data;
@@ -83,12 +86,13 @@ const useLogin = () => {
       const { data: profileData, isSuccess } = await getUserProfile();
       if (isSuccess) {
         console.log('Get Profile successful!', profileData);
-        await handlerSetItem(Keys.userInfo, JSON.stringify(profileData));
+
+        setUserProfile(profileData);
       }
     } catch (err) {
       console.log('Get Profile failed!', err);
     }
-  }, [getUserProfile]);
+  }, [getUserProfile, setUserProfile]);
 
   const handleNavigateHome = useCallback(
     async (token: string) => {
@@ -97,7 +101,7 @@ const useLogin = () => {
       await handlerSetItem(Keys.userToken, token);
       await handleGetUserProfile();
 
-      resetNavigate('HomeScreen');
+      resetNavigate('BottomTabBar');
     },
     [handleGetUserProfile, resetNavigate],
   );

@@ -1,6 +1,7 @@
 type ColorShades = {
   neutral: {
     base: string;
+    n50: string;
     n100: string;
     n500: string;
     disabled: string;

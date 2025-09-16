@@ -7,11 +7,114 @@ export const MISC_PREFIX = 'misc';
 
 export const URL_PATH = {
   // MARK: AUTH
-  auth_refresh_token: `${API_VERSION}/${AUTH_PREFIX}/refresh-token`,
-  auth_check_email: `${API_VERSION}/${AUTH_PREFIX}/check-email`,
-  auth_login: `${API_VERSION}/${AUTH_PREFIX}/login`,
-  auth_register: `${API_VERSION}/${AUTH_PREFIX}/register`,
+  auth: {
+    refresh_token: `${API_VERSION}/${AUTH_PREFIX}/refresh-token`,
+    check_email: `${API_VERSION}/${AUTH_PREFIX}/check-email`,
+    login: `${API_VERSION}/${AUTH_PREFIX}/login`,
+    register: `${API_VERSION}/${AUTH_PREFIX}/register`,
+    logout: `${API_VERSION}/${AUTH_PREFIX}/logout`,
+  },
 
   // MARK: USER
-  user_get_profile: `${API_VERSION}/${USER_PREFIX}/profile`,
+  user: {
+    get_profile: `${API_VERSION}/${USER_PREFIX}/profile`,
+  },
+
+  // MARK: Meals
+  meals: {
+    today_recommendation: `${API_VERSION}/${MEALS_PREFIX}/today-recommendation`,
+    popular_picks: ({ limit, page }: { limit?: number; page?: number }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/popular-picks${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+    cuisine_picks: ({ limit, page }: { limit?: number; page?: number }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/cuisine-picks${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+    search_meals: ({
+      query,
+      limit,
+      page,
+    }: {
+      query?: string;
+      limit?: number;
+      page?: number;
+    }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+      const search = (query ?? '').replace(' ', '+');
+      const searchTxt = encodeURIComponent(search);
+
+      return `${API_VERSION}/${MEALS_PREFIX}/search/${searchTxt}${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+    meals_category: ({
+      query,
+      limit,
+      page,
+    }: {
+      query?: string;
+      limit?: number;
+      page?: number;
+    }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/category/${query}${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+    meals_area: ({
+      query,
+      limit,
+      page,
+    }: {
+      query?: string;
+      limit?: number;
+      page?: number;
+    }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/area/${query}${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
+    favourites: `${API_VERSION}/${MEALS_PREFIX}/favourites`,
+  },
+
+  // MARK: Misc
+  misc: {
+    category: `${API_VERSION}/${MISC_PREFIX}/category`,
+    area: `${API_VERSION}/${MISC_PREFIX}/area`,
+  },
 };
