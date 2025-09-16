@@ -4,7 +4,7 @@ import useMealsCategory from './useMealsCategory';
 import FastImage from 'react-native-fast-image';
 import { styles } from './styles';
 import { Icon } from 'react-native-paper';
-import { screenWidth } from '@constants';
+import { Colors, screenWidth } from '@constants';
 import EmptyState from '@assets/images/empty-state.png';
 
 const MealsCategoryScreen: React.FC = () => {
@@ -26,7 +26,13 @@ const MealsCategoryScreen: React.FC = () => {
           style={styles.flex1}
         />
         <View style={styles.favoriteIcon}>
-          <Icon source={'favorite-border'} size={18} />
+          <Icon
+            source={!item?.isFavourite ? 'favorite-border' : 'favorite'}
+            color={
+              !item?.isFavourite ? Colors.neutral.base : Colors.danger.base
+            }
+            size={18}
+          />
         </View>
       </View>
     );

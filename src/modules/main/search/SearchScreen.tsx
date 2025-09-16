@@ -41,7 +41,13 @@ const SearchScreen: React.FC = () => {
           style={styles.flex1}
         />
         <View style={styles.favoriteIcon}>
-          <Icon source={'favorite-border'} size={18} />
+          <Icon
+            source={!item?.isFavourite ? 'favorite-border' : 'favorite'}
+            color={
+              !item?.isFavourite ? Colors.neutral.base : Colors.danger.base
+            }
+            size={18}
+          />
         </View>
       </View>
     );

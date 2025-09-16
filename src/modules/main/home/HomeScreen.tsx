@@ -35,7 +35,13 @@ const HomeScreen: React.FC = () => {
           resizeMode="cover"
         />
         <View style={[styles.favoriteIcon, styles.favoriteIconPosition]}>
-          <Icon source={'favorite-border'} size={18} />
+          <Icon
+            source={!item?.isFavourite ? 'favorite-border' : 'favorite'}
+            color={
+              !item?.isFavourite ? Colors.neutral.base : Colors.danger.base
+            }
+            size={18}
+          />
         </View>
         <Text
           text={item?.mealName}
@@ -149,7 +155,19 @@ const HomeScreen: React.FC = () => {
               </View>
 
               <View style={styles.favoriteIcon}>
-                <Icon source={'favorite-border'} size={18} />
+                <Icon
+                  source={
+                    !todayRecommendation?.isFavourite
+                      ? 'favorite-border'
+                      : 'favorite'
+                  }
+                  color={
+                    !todayRecommendation?.isFavourite
+                      ? Colors.neutral.base
+                      : Colors.danger.base
+                  }
+                  size={18}
+                />
               </View>
             </View>
           </View>
