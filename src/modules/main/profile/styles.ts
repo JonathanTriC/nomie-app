@@ -7,6 +7,15 @@ export const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: Colors.white,
   },
+  avatarWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    borderWidth: 1,
+    borderColor: Colors.primary.base,
+  },
   avatarImg: {
     width: 80,
     height: 80,
@@ -19,7 +28,6 @@ export const styles = StyleSheet.create({
   preferencesContainer: {
     marginTop: 12,
     padding: 12,
-    gap: 12,
     borderRadius: 12,
     backgroundColor: Colors.neutral.n100,
   },
@@ -29,6 +37,7 @@ export const styles = StyleSheet.create({
     gap: 16,
   },
   divider: {
+    marginVertical: 12,
     height: 1,
     width: '100%',
     backgroundColor: Colors.neutral.disabled,

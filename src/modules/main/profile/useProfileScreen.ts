@@ -10,6 +10,33 @@ const useProfileScreen = () => {
   const userProfile = useUserStore(state => state.userProfile);
   const clearUserProfile = useUserStore(state => state.clearUserProfile);
 
+  const listPreferences = [
+    {
+      id: 1,
+      icon: 'person',
+      label: 'User Profile',
+      onPress: () => {},
+    },
+    {
+      id: 2,
+      icon: 'lock',
+      label: 'Change Password',
+      onPress: () => {},
+    },
+    {
+      id: 3,
+      icon: 'person-off',
+      label: 'Delete Account',
+      onPress: () => {},
+    },
+    {
+      id: 4,
+      icon: 'logout',
+      label: 'Logout',
+      onPress: () => handleLogout(),
+    },
+  ];
+
   const { mutate: submitLogout } = useMutation({
     mutationKey: ['logout'],
     mutationFn: async () => {
@@ -40,7 +67,7 @@ const useProfileScreen = () => {
 
   return {
     userProfile,
-    handleLogout,
+    listPreferences,
   };
 };
 
