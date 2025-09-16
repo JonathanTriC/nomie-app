@@ -12,6 +12,7 @@ export const URL_PATH = {
     check_email: `${API_VERSION}/${AUTH_PREFIX}/check-email`,
     login: `${API_VERSION}/${AUTH_PREFIX}/login`,
     register: `${API_VERSION}/${AUTH_PREFIX}/register`,
+    logout: `${API_VERSION}/${AUTH_PREFIX}/logout`,
   },
 
   // MARK: USER
