@@ -1,11 +1,13 @@
 import { apiGet } from '@api';
 import { URL_PATH } from '@constants';
+import { useNavigate } from '@hooks';
 import { useFocusEffect } from '@react-navigation/native';
 import { useUserStore } from '@stores';
 import { keepPreviousData, useQueries } from '@tanstack/react-query';
 import { useCallback } from 'react';
 
 const useHomeScreen = () => {
+  const { navigateScreen } = useNavigate();
   const userProfile = useUserStore(state => state.userProfile);
 
   const [todayRecommendationQueries, popularPicksQueries, cuisinePicksQueries] =
@@ -43,6 +45,28 @@ const useHomeScreen = () => {
         },
       ],
     });
+
+  const goToDetailScreen = useCallback(
+    (mealId: string) => {
+      navigateScreen<DetailMealsScreenParams>('DetailMealsScreen', {
+        mealId,
+      });
+    },
+    [navigateScreen],
+  );
+
+  const onSearchByCategory = ({
+    type,
+    query,
+  }: {
+    type: 'category' | 'area';
+    query: string;
+  }) => {
+    return navigateScreen<MealsCategoryScreenParams>('MealsCategoryScreen', {
+      type,
+      query,
+    });
+  };
 
   const {
     data: todayRecommendation,
@@ -84,6 +108,8 @@ const useHomeScreen = () => {
     cuisinePicks,
     isLoadingCuisinePicks,
     isErrorCuisinePicks,
+    goToDetailScreen,
+    onSearchByCategory,
   };
 };
 

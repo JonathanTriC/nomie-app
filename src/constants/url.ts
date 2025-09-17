@@ -109,6 +109,9 @@ export const URL_PATH = {
         queryString ? `?${queryString}` : ''
       }`;
     },
+    detail_meals: ({ mealId }: { mealId: string }) => {
+      return `${API_VERSION}/${MEALS_PREFIX}/detail/${mealId}`;
+    },
     favourites: `${API_VERSION}/${MEALS_PREFIX}/favourites`,
   },
 

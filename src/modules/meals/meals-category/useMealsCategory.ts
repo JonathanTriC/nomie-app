@@ -1,11 +1,12 @@
 import { apiGet } from '@api';
 import { URL_PATH } from '@constants';
 import { useNavigate } from '@hooks';
+import { useFocusEffect } from '@react-navigation/native';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 const useMealsCategory = () => {
-  const { getRouteParams } = useNavigate();
+  const { navigateScreen, getRouteParams } = useNavigate();
   const { type, query } = getRouteParams<MealsCategoryScreenParams>();
 
   const {
@@ -76,6 +77,15 @@ const useMealsCategory = () => {
     }
   };
 
+  const goToDetailScreen = useCallback(
+    (mealId: string) => {
+      navigateScreen<DetailMealsScreenParams>('DetailMealsScreen', {
+        mealId,
+      });
+    },
+    [navigateScreen],
+  );
+
   const mealsCategory =
     dataMealsCategory?.pages.flatMap(page => page.meals) ?? [];
   const mealsArea = dataMealsArea?.pages.flatMap(page => page.meals) ?? [];
@@ -84,14 +94,18 @@ const useMealsCategory = () => {
   const isFetchingNextPage =
     type === 'category' ? isFetchingNextPageCategory : isFetchingNextPageArea;
 
-  useEffect(() => {
-    if (type === 'category') {
-      refetchMealsCategory();
-    } else {
-      refetchMealsArea();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type]);
+  useFocusEffect(
+    useCallback(() => {
+      if (type === 'category') {
+        refetchMealsCategory();
+      } else {
+        refetchMealsArea();
+      }
+
+      return () => {};
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [type]),
+  );
 
   return {
     query,
@@ -99,6 +113,7 @@ const useMealsCategory = () => {
     isLoading,
     isFetchingNextPage,
     loadNextPageData,
+    goToDetailScreen,
   };
 };
 

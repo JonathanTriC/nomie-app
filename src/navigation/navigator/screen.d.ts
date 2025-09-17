@@ -18,6 +18,9 @@ interface MealsCategoryScreenParams {
   type: 'category' | 'area';
   query: string;
 }
+interface DetailMealsScreenParams {
+  mealId: string;
+}
 
 type ParamList = {
   SplashScreen: SplashScreenParams;
@@ -36,4 +39,5 @@ type ParamList = {
 
   // MARK: Main Modules
   MealsCategoryScreen: MealsCategoryScreenParams;
+  DetailMealsScreen: DetailMealsScreenParams;
 };

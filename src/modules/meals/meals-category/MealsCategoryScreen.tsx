@@ -1,5 +1,5 @@
 import { Header, SkeletonLoading, Text } from '@components';
-import { FlatList, Image, View } from 'react-native';
+import { FlatList, Image, TouchableOpacity, View } from 'react-native';
 import useMealsCategory from './useMealsCategory';
 import FastImage from 'react-native-fast-image';
 import { styles } from './styles';
@@ -8,12 +8,22 @@ import { Colors, screenWidth } from '@constants';
 import EmptyState from '@assets/images/empty-state.png';
 
 const MealsCategoryScreen: React.FC = () => {
-  const { query, data, isLoading, isFetchingNextPage, loadNextPageData } =
-    useMealsCategory();
+  const {
+    query,
+    data,
+    isLoading,
+    isFetchingNextPage,
+    loadNextPageData,
+    goToDetailScreen,
+  } = useMealsCategory();
 
   const renderSearchItem = (item: PopularPicksItem) => {
     return (
-      <View key={item?.mealId} style={styles.searchCard}>
+      <TouchableOpacity
+        key={item?.mealId}
+        style={styles.searchCard}
+        onPress={() => goToDetailScreen(item?.mealId)}
+      >
         <FastImage
           source={{ uri: item?.mealThumbImage }}
           style={styles.searchImg}
@@ -34,7 +44,7 @@ const MealsCategoryScreen: React.FC = () => {
             size={18}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

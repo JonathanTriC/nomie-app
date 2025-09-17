@@ -7,6 +7,7 @@ const Colors = {
     base: '#2C2C2C',
     n50: '#FAFCFE',
     n100: '#F5F5F5',
+    n200: '#E1E6EC',
     n300: '#6E6E6E',
     n500: '#9E9E9E',
     disabled: '#CACDD2',

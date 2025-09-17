@@ -23,12 +23,17 @@ const SearchScreen: React.FC = () => {
     expandedType,
     toggleAccordion,
     loadNextPageData,
+    goToDetailScreen,
     onSearchByCategory,
   } = useSearchScreen();
 
   const renderSearchItem = (item: PopularPicksItem) => {
     return (
-      <View key={item?.mealId} style={styles.searchCard}>
+      <TouchableOpacity
+        key={item?.mealId}
+        style={styles.searchCard}
+        onPress={() => goToDetailScreen(item?.mealId)}
+      >
         <FastImage
           source={{ uri: item?.mealThumbImage }}
           style={styles.searchImg}
@@ -49,7 +54,7 @@ const SearchScreen: React.FC = () => {
             size={18}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

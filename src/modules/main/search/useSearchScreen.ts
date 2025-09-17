@@ -106,6 +106,15 @@ const useSearchScreen = () => {
     });
   };
 
+  const goToDetailScreen = useCallback(
+    (mealId: string) => {
+      navigateScreen<DetailMealsScreenParams>('DetailMealsScreen', {
+        mealId,
+      });
+    },
+    [navigateScreen],
+  );
+
   const { data: categoryList, isLoading: isLoadingCategoryList } =
     categoryListQueries;
   const { data: areaList, isLoading: isLoadingAreaList } = areaListQueries;
@@ -137,6 +146,7 @@ const useSearchScreen = () => {
     toggleAccordion,
     fetchNextPage,
     loadNextPageData,
+    goToDetailScreen,
     onSearchByCategory,
   };
 };

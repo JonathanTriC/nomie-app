@@ -23,6 +23,7 @@ type Meal = {
 type MealIngredient = {
   ingredientName: string;
   ingredientMeasure: string;
+  ingredientImage: string;
 };
 
 type PopularPicksData = {
@@ -34,7 +35,7 @@ type PopularPicksData = {
 };
 
 type CuisinePicksData = {
-  areaName: string;
+  areaName: Area;
   meals: PopularPicksItem[];
   page: number;
   totalItems: number;
@@ -63,4 +64,35 @@ type FavoriteMealsItem = {
   mealId: string;
   mealName: string;
   mealThumbImage: string;
+};
+
+type DetailMealsData = {
+  mealId: string;
+  mealName: string;
+  mealAlternate: string;
+  mealCategory: string;
+  mealArea: string;
+  mealInstructions: string;
+  mealThumbImage: string;
+  mealTags: string;
+  mealYoutubeTutorial: string;
+  mealIngredient: MealIngredient[];
+  mealSource: string;
+  mealImageSource: string;
+  mealCreativeCommonsConfirmed: string;
+  dateModified: string;
+  isFavourite: boolean;
+  reviews: MealReview[];
+  avgRating: number;
+  totalReviews: number;
+};
+
+type MealReview = {
+  id: number;
+  userId: string;
+  mealId: string;
+  rating: number;
+  reviewText: string;
+  reviewImage?: string;
+  createdAt: Date;
 };
