@@ -3,6 +3,7 @@ type ColorShades = {
     base: string;
     n50: string;
     n100: string;
+    n200: string;
     n500: string;
     disabled: string;
   };

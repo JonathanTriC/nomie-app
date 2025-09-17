@@ -9,11 +9,15 @@ import EmptyState from '@assets/images/empty-state.png';
 import { Image } from 'react-native';
 
 const FavouritesScreen: React.FC = () => {
-  const { dataFavorite } = useFavouriteScreen();
+  const { dataFavorite, goToDetailScreen } = useFavouriteScreen();
 
   const renderItem = (item: FavoriteMealsItem) => {
     return (
-      <TouchableOpacity key={item?.mealId} style={styles.favoriteCard}>
+      <TouchableOpacity
+        key={item?.mealId}
+        style={styles.favoriteCard}
+        onPress={() => goToDetailScreen(item?.mealId)}
+      >
         <View>
           <FastImage
             source={{ uri: item?.mealThumbImage }}

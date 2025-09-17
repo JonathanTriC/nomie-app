@@ -221,4 +221,128 @@ const apiPost: <T = any>(props: ApiProps) => Promise<T> = async (
   }
 };
 
-export { apiGet, apiGetWithoutToken, apiPost, apiPostWithoutToken };
+const apiDeleteWithoutToken: <T = any>(props: ApiProps) => Promise<T> = async (
+  props: ApiProps,
+) => {
+  try {
+    const fullResponse = props?.fullResponse ?? false;
+    const resHeaders = props?.resHeaders ?? false;
+    // Using clientWithoutToken.delete method
+    const res = await clientWithoutToken.delete(props?.url, {
+      ...props.config,
+      headers: props?.headers,
+      data: props?.body, // DELETE requests can include a body via the `data` property in config
+    });
+
+    logApi({
+      nameFunction: 'apiDeleteWithoutToken',
+      tags: props?.tags,
+      body: props?.body,
+      res: res,
+    });
+
+    return Promise.resolve(
+      fullResponse ? res : resHeaders ? res?.headers : res?.data,
+    );
+  } catch (e: any) {
+    // On retry, calls the version with a token, following your existing pattern
+    if ((props.retry ?? 0) > 0) {
+      return await apiDelete({
+        ...props,
+        retry: props.retry ? props.retry - 1 : 0,
+      });
+    }
+
+    if (e.response) {
+      console.log('🚀 ~ apiDeleteWithoutToken ~ status:', e.response.status);
+      console.log('🚀 ~ apiDeleteWithoutToken ~ data:', e.response.data);
+    } else if (e.request) {
+      console.log('🚀 ~ apiDeleteWithoutToken ~ request:', e.request);
+    } else {
+      console.log('🚀 ~ apiDeleteWithoutToken ~ message:', e.message);
+    }
+    const errData = e.response?.data ?? e.message;
+
+    logApi({
+      nameFunction: 'apiDeleteWithoutToken',
+      tags: props?.tags,
+      body: props?.body,
+      e: errData,
+    });
+
+    const errorData = {
+      status: e?.response?.status,
+      message: errData || 'Terjadi Kesalahan',
+      data: e?.response?.data,
+    };
+
+    return Promise.reject(errorData);
+  }
+};
+
+const apiDelete: <T = any>(props: ApiProps) => Promise<T> = async (
+  props: ApiProps,
+) => {
+  try {
+    const fullResponse = props?.fullResponse ?? false;
+    const resHeaders = props?.resHeaders ?? false;
+    // Using client.delete method
+    const res = await client.delete(props?.url, {
+      ...props.config,
+      headers: props?.headers,
+      data: props?.body, // DELETE requests can include a body via the `data` property in config
+    });
+
+    logApi({
+      nameFunction: 'apiDelete',
+      tags: props?.tags,
+      body: props?.body,
+      res: res,
+    });
+
+    return Promise.resolve(
+      fullResponse ? res : resHeaders ? res?.headers : res?.data,
+    );
+  } catch (e: any) {
+    if ((props.retry ?? 0) > 0) {
+      return await apiDelete({
+        ...props,
+        retry: props.retry ? props.retry - 1 : 0,
+      });
+    }
+
+    if (e.response) {
+      console.log('🚀 ~ apiDelete ~ status:', e.response.status);
+      console.log('🚀 ~ apiDelete ~ data:', e.response.data);
+    } else if (e.request) {
+      console.log('🚀 ~ apiDelete ~ request:', e.request);
+    } else {
+      console.log('🚀 ~ apiDelete ~ message:', e.message);
+    }
+    const errData = e.response?.data ?? e.message;
+
+    logApi({
+      nameFunction: 'apiDelete',
+      tags: props?.tags,
+      body: props?.body,
+      e: errData,
+    });
+
+    const errorData = {
+      status: e?.response?.status,
+      message: errData || 'Terjadi Kesalahan',
+      data: e?.response?.data,
+    };
+
+    return Promise.reject(errorData);
+  }
+};
+
+export {
+  apiGet,
+  apiGetWithoutToken,
+  apiPost,
+  apiPostWithoutToken,
+  apiDelete,
+  apiDeleteWithoutToken,
+};

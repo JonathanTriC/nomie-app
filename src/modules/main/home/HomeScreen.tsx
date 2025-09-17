@@ -7,6 +7,8 @@ import { Icon } from 'react-native-paper';
 import FastImage from 'react-native-fast-image';
 
 interface RenderHomeItemProps<T extends any[]> {
+  type: 'category' | 'area';
+  query: string;
   isLoading: boolean;
   isError: boolean;
   label: string;
@@ -24,16 +26,23 @@ const HomeScreen: React.FC = () => {
     cuisinePicks,
     isLoadingCuisinePicks,
     isErrorCuisinePicks,
+    goToDetailScreen,
+    onSearchByCategory,
   } = useHomeScreen();
 
   const cardsItem = (item: PopularPicksItem) => {
     return (
-      <View key={item?.mealId} style={styles.mealCards}>
+      <TouchableOpacity
+        key={item?.mealId}
+        style={styles.mealCards}
+        onPress={() => goToDetailScreen(item?.mealId)}
+      >
         <FastImage
           source={{ uri: item?.mealThumbImage }}
           style={styles.mealImg}
           resizeMode="cover"
         />
+
         <View style={[styles.favoriteIcon, styles.favoriteIconPosition]}>
           <Icon
             source={!item?.isFavourite ? 'favorite-border' : 'favorite'}
@@ -49,7 +58,7 @@ const HomeScreen: React.FC = () => {
           color={Colors.neutral.base}
           numberOfLines={2}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -69,6 +78,8 @@ const HomeScreen: React.FC = () => {
   };
 
   const renderHomeItemComponent = <T extends any[]>({
+    type,
+    query,
     isLoading,
     isError,
     label,
@@ -84,7 +95,14 @@ const HomeScreen: React.FC = () => {
       <View style={styles.gap8}>
         <View style={styles.rowBetween}>
           <Text text={label} type="bold-lg" color={Colors.neutral.base} />
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              onSearchByCategory({
+                type,
+                query,
+              })
+            }
+          >
             <Icon source={'chevron-right'} size={20} />
           </TouchableOpacity>
         </View>
@@ -133,7 +151,10 @@ const HomeScreen: React.FC = () => {
             type="bold-lg"
             color={Colors.neutral.base}
           />
-          <View style={styles.todayRecommendationCards}>
+          <TouchableOpacity
+            style={styles.todayRecommendationCards}
+            onPress={() => goToDetailScreen(todayRecommendation?.mealId ?? '')}
+          >
             <FastImage
               source={{ uri: todayRecommendation?.mealThumbImage }}
               style={styles.todayRecommendationImg}
@@ -170,11 +191,13 @@ const HomeScreen: React.FC = () => {
                 />
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       )}
 
       {renderHomeItemComponent({
+        type: 'category',
+        query: popularPicks?.categoryName ?? '',
         isLoading: isLoadingPopularPicks,
         isError: isErrorPopularPicks,
         label: `Tasty ${popularPicks?.categoryName} Dishes Everyone Loves`,
@@ -182,9 +205,11 @@ const HomeScreen: React.FC = () => {
       })}
 
       {renderHomeItemComponent({
+        type: 'area',
+        query: cuisinePicks?.areaName?.name ?? '',
         isLoading: isLoadingCuisinePicks,
         isError: isErrorCuisinePicks,
-        label: `Straight from ${cuisinePicks?.areaName} Kitchen`,
+        label: `Straight from ${cuisinePicks?.areaName?.name} Kitchen`,
         data: cuisinePicks?.meals,
       })}
 

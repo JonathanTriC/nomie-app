@@ -46,6 +46,14 @@ const handlerClearItem = async () => {
   } catch (error) {}
 };
 
+const getYouTubeId = (url: string | undefined) => {
+  if (!url) return '';
+  const regex =
+    /(?:youtube\.com\/(?:[^/\n\s]+\/\S*?\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
+  const match = url?.match(regex);
+  return match ? match[1] : null;
+};
+
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
@@ -58,4 +66,5 @@ export {
   handlerSetItem,
   handlerRemoveItem,
   handlerClearItem,
+  getYouTubeId,
 };

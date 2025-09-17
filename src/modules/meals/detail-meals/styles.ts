@@ -1,0 +1,143 @@
+import { Colors, screenHeight, screenWidth } from '@constants';
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  screenWrapper: {
+    backgroundColor: Colors.neutral.n50,
+    height: '100%',
+  },
+  container: {
+    position: 'absolute',
+    height: '100%',
+    width: screenWidth,
+    backgroundColor: Colors.neutral.n50,
+  },
+  headerContainer: {
+    position: 'absolute',
+    width: '100%',
+  },
+  header: {
+    alignItems: 'flex-start',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+  },
+  headerPosition: { position: 'relative' },
+  initRowHeader: {
+    width: screenWidth - 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  rowHeader: {
+    width: screenWidth - 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  headerTxt: {
+    flex: 1,
+  },
+  headerIconContainer: {
+    padding: 6,
+    borderRadius: 12,
+    backgroundColor: Colors.white,
+  },
+  mealImage: {
+    width: screenWidth,
+    height: screenHeight * 0.3,
+  },
+  mainContentContainer: {
+    marginTop: -20,
+    marginBottom: 60,
+    width: screenWidth,
+    padding: 20,
+    gap: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: Colors.neutral.n50,
+  },
+  ingredientImage: { width: 20, height: 20 },
+  starRow: {
+    flexDirection: 'row',
+    gap: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rowBetween: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  tabItemContainer: {
+    padding: 4,
+    gap: 4,
+    borderRadius: 20,
+    flexDirection: 'row',
+    backgroundColor: Colors.neutral.n100,
+  },
+  tabItemItemActive: {
+    flex: 1,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: Colors.white,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 2,
+  },
+  tabItemItem: {
+    flex: 1,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: 'transparent',
+  },
+  tabItemTxtActive: {
+    fontSize: 12,
+    fontWeight: '700',
+    textAlign: 'center',
+    color: Colors.neutral.base,
+  },
+  tabItemTxt: {
+    fontSize: 12,
+    fontWeight: '400',
+    textAlign: 'center',
+    color: Colors.neutral.n500,
+  },
+  ingredientItemContainer: {
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    borderRadius: 12,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 2,
+    backgroundColor: Colors.white,
+  },
+  playContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  playButton: {
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    borderRadius: 100,
+    backgroundColor: Colors.primary.p600,
+  },
+  gap6: {
+    gap: 6,
+  },
+  gap20: {
+    gap: 20,
+  },
+  pv4: { paddingVertical: 4 },
+  flex1: { flex: 1 },
+});

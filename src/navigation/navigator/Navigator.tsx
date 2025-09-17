@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigator } from './useNavigator';
 import {
   BottomTabBar,
+  DetailMealsScreen,
   FavouritesScreen,
   HomeScreen,
   LoginScreen,
@@ -45,6 +46,24 @@ export const Navigator: React.FC<NavigatorProps> = () => {
       <Stack.Screen
         name={'MealsCategoryScreen'}
         component={MealsCategoryScreen}
+      />
+      <Stack.Screen
+        name={'DetailMealsScreen'}
+        component={DetailMealsScreen}
+        options={{
+          gestureEnabled: false,
+          transitionSpec: {
+            open: { animation: 'timing', config: { duration: 500 } },
+            close: { animation: 'timing', config: { duration: 500 } },
+          },
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress,
+              },
+            };
+          },
+        }}
       />
     </Stack.Navigator>
   );
