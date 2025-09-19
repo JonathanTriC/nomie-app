@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useCallback } from 'react';
 
 const useProfileScreen = () => {
-  const { resetNavigate } = useNavigate();
+  const { resetNavigate, navigateScreen } = useNavigate();
   const userProfile = useUserStore(state => state.userProfile);
   const clearUserProfile = useUserStore(state => state.clearUserProfile);
 
@@ -14,8 +14,8 @@ const useProfileScreen = () => {
     {
       id: 1,
       icon: 'person',
-      label: 'User Profile',
-      onPress: () => {},
+      label: 'Edit Profile',
+      onPress: () => navigateScreen('EditProfileScreen'),
     },
     {
       id: 2,

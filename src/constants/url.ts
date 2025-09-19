@@ -18,6 +18,7 @@ export const URL_PATH = {
   // MARK: USER
   user: {
     get_profile: `${API_VERSION}/${USER_PREFIX}/profile`,
+    update_profile: `${API_VERSION}/${USER_PREFIX}/update-profile`,
   },
 
   // MARK: Meals

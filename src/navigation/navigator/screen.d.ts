@@ -22,6 +22,8 @@ interface DetailMealsScreenParams {
   mealId: string;
 }
 
+interface EditProfileScreenParams {}
+
 type ParamList = {
   SplashScreen: SplashScreenParams;
 
@@ -37,7 +39,10 @@ type ParamList = {
   FavouritesScreen: FavouritesScreenParams;
   ProfileScreen: ProfileScreenParams;
 
-  // MARK: Main Modules
+  // MARK: Meals Modules
   MealsCategoryScreen: MealsCategoryScreenParams;
   DetailMealsScreen: DetailMealsScreenParams;
+
+  // MARK: Profile Modules
+  EditProfileScreen: EditProfileScreenParams;
 };

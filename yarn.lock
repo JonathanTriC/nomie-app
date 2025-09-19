@@ -3107,6 +3107,7 @@ __metadata:
     react-native-screens: ^4.14.1
     react-native-skeleton-placeholder: ^5.2.4
     react-native-splash-screen: ^3.3.0
+    react-native-toast-message: ^2.3.3
     react-native-vector-icons: ^10.3.0
     react-native-webview: ^13.16.0
     react-native-worklets: latest
@@ -8416,6 +8417,16 @@ __metadata:
   peerDependencies:
     react-native: ">=0.57.0"
   checksum: 14c565d5d4214f55586dcf6f7abd12d99d3e0667f67de3bda7aa24988971567b283a4187fbc0c6269c83b3c21d59d1950335c61bb0780ec2d065e20b3b9199d0
+  languageName: node
+  linkType: hard
+
+"react-native-toast-message@npm:^2.3.3":
+  version: 2.3.3
+  resolution: "react-native-toast-message@npm:2.3.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 313fe6e6b6437b2384d13f8987a141f9aa2df0930a668628276ed5ea990917e7d953dfa1584aa4991326ee9430baab1b735adf0b4a9861e702996617a583cc33
   languageName: node
   linkType: hard
 

@@ -21,7 +21,7 @@ const ProfileScreen: React.FC = () => {
             />
           </View>
           <Text
-            text={userProfile?.fullname}
+            text={`@${userProfile?.username}`}
             type="bold-lg"
             color={Colors.neutral.base}
           />

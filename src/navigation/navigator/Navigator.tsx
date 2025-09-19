@@ -3,6 +3,7 @@ import { useNavigator } from './useNavigator';
 import {
   BottomTabBar,
   DetailMealsScreen,
+  EditProfileScreen,
   FavouritesScreen,
   HomeScreen,
   LoginScreen,
@@ -65,6 +66,9 @@ export const Navigator: React.FC<NavigatorProps> = () => {
           },
         }}
       />
+
+      {/* //MARK: Profile Modules */}
+      <Stack.Screen name={'EditProfileScreen'} component={EditProfileScreen} />
     </Stack.Navigator>
   );
 };
