@@ -11,6 +11,10 @@ type UpdateProfileResponse = {
   user: User;
 };
 
+type ChangePasswordResponse = {
+  message: string;
+};
+
 type User = {
   avatar: string;
   email: string;

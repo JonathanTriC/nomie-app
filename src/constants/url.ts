@@ -19,6 +19,7 @@ export const URL_PATH = {
   user: {
     get_profile: `${API_VERSION}/${USER_PREFIX}/profile`,
     update_profile: `${API_VERSION}/${USER_PREFIX}/update-profile`,
+    change_password: `${API_VERSION}/${USER_PREFIX}/change-password`,
   },
 
   // MARK: Meals

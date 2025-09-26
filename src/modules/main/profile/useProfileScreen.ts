@@ -21,7 +21,7 @@ const useProfileScreen = () => {
       id: 2,
       icon: 'lock',
       label: 'Change Password',
-      onPress: () => {},
+      onPress: () => navigateScreen('ChangePasswordScreen'),
     },
     {
       id: 3,

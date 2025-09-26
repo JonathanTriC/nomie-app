@@ -23,6 +23,7 @@ interface DetailMealsScreenParams {
 }
 
 interface EditProfileScreenParams {}
+interface ChangePasswordScreenParams {}
 
 type ParamList = {
   SplashScreen: SplashScreenParams;
@@ -45,4 +46,5 @@ type ParamList = {
 
   // MARK: Profile Modules
   EditProfileScreen: EditProfileScreenParams;
+  ChangePasswordScreen: ChangePasswordScreenParams;
 };
