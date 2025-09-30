@@ -1,6 +1,6 @@
 import { NavigationContext } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { Colors } from '@constants';
 import { styles } from './styles';
@@ -8,14 +8,15 @@ import { styles } from './styles';
 type Props = {
   withBackIcon?: boolean;
   label?: string;
+  style?: StyleProp<ViewStyle>;
 };
 
-const Header = ({ withBackIcon = true, label }: Props) => {
+const Header = ({ withBackIcon = true, label, style }: Props) => {
   const navigation: any = React.useContext(NavigationContext);
 
   return (
     <SafeAreaView>
-      <View style={styles.headerComponent}>
+      <View style={[styles.headerComponent, style]}>
         {withBackIcon ? (
           <IconButton
             icon={'chevron-left'}

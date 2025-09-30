@@ -36,6 +36,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
   },
+  modalContent: {
+    gap: 20,
+    alignContent: 'center',
+  },
   divider: {
     marginVertical: 12,
     height: 1,
@@ -47,5 +51,8 @@ export const styles = StyleSheet.create({
   },
   mt40: {
     marginTop: 40,
+  },
+  gap8: {
+    gap: 8,
   },
 });

@@ -1,5 +1,6 @@
 import { Dimensions } from 'react-native';
 import { MMKV, Mode } from 'react-native-mmkv';
+import Toast from 'react-native-toast-message';
 
 const storage = new MMKV({
   id: 'app-storage',
@@ -52,6 +53,33 @@ const getYouTubeId = (url: string | undefined) => {
     /(?:youtube\.com\/(?:[^/\n\s]+\/\S*?\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
   const match = url?.match(regex);
   return match ? match[1] : null;
+};
+
+export const showSuccessToast = (message: string) => {
+  return Toast.show({
+    type: 'success',
+    text1: message,
+  });
+};
+
+export const showErrorToast = (
+  message: string,
+  position: 'top' | 'bottom' = 'bottom',
+) => {
+  return Toast.show({
+    type: 'error',
+    text1: message,
+    position,
+    topOffset: 70,
+    visibilityTime: 5000,
+  });
+};
+
+export const showDefaultToast = (message: string) => {
+  return Toast.show({
+    type: 'default',
+    text1: message,
+  });
 };
 
 const screenWidth = Dimensions.get('screen').width;

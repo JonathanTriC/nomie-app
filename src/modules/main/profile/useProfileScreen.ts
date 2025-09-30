@@ -3,31 +3,39 @@ import { handlerRemoveItem, Keys, URL_PATH } from '@constants';
 import { useNavigate } from '@hooks';
 import { useUserStore } from '@stores';
 import { useMutation } from '@tanstack/react-query';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 const useProfileScreen = () => {
-  const { resetNavigate } = useNavigate();
+  const { resetNavigate, navigateScreen } = useNavigate();
   const userProfile = useUserStore(state => state.userProfile);
   const clearUserProfile = useUserStore(state => state.clearUserProfile);
+
+  const [isShowModalDeleteAccount, setShowDeleteModalAccount] =
+    useState<boolean>(false);
+
+  const toggleDeleteAccountModal = useCallback(
+    () => setShowDeleteModalAccount(prevState => !prevState),
+    [],
+  );
 
   const listPreferences = [
     {
       id: 1,
       icon: 'person',
-      label: 'User Profile',
-      onPress: () => {},
+      label: 'Edit Profile',
+      onPress: () => navigateScreen('EditProfileScreen'),
     },
     {
       id: 2,
       icon: 'lock',
       label: 'Change Password',
-      onPress: () => {},
+      onPress: () => navigateScreen('ChangePasswordScreen'),
     },
     {
       id: 3,
       icon: 'person-off',
       label: 'Delete Account',
-      onPress: () => {},
+      onPress: toggleDeleteAccountModal,
     },
     {
       id: 4,
@@ -36,6 +44,24 @@ const useProfileScreen = () => {
       onPress: () => handleLogout(),
     },
   ];
+
+  const { mutate: submitDeleteAccount } = useMutation({
+    mutationKey: ['delete-account'],
+    mutationFn: async () => {
+      const data = await apiPost({
+        url: `${URL_PATH.user.delete_account}`,
+      });
+
+      return data;
+    },
+    onSuccess: data => {
+      console.log('Delete Account successful! Token:', data.token);
+      onDeleteAccount();
+    },
+    onError: data => {
+      console.log('Delete Account failed! Error:', data?.message);
+    },
+  });
 
   const { mutate: submitLogout } = useMutation({
     mutationKey: ['logout'],
@@ -51,15 +77,28 @@ const useProfileScreen = () => {
       onLogout();
     },
     onError: data => {
-      console.log('Login failed! Error:', data?.message);
+      console.log('Logout failed! Error:', data?.message);
     },
   });
+
+  const onDeleteAccount = useCallback(async () => {
+    await handlerRemoveItem(Keys.userToken);
+    clearUserProfile();
+    toggleDeleteAccountModal();
+    setTimeout(() => {
+      resetNavigate('OnboardingScreen');
+    }, 500);
+  }, [clearUserProfile, resetNavigate, toggleDeleteAccountModal]);
 
   const onLogout = useCallback(async () => {
     await handlerRemoveItem(Keys.userToken);
     clearUserProfile();
     resetNavigate('OnboardingScreen');
   }, [clearUserProfile, resetNavigate]);
+
+  const handleDeleteAccount = useCallback(() => {
+    submitDeleteAccount();
+  }, [submitDeleteAccount]);
 
   const handleLogout = useCallback(() => {
     submitLogout();
@@ -68,6 +107,9 @@ const useProfileScreen = () => {
   return {
     userProfile,
     listPreferences,
+    isShowModalDeleteAccount,
+    toggleDeleteAccountModal,
+    handleDeleteAccount,
   };
 };
 
