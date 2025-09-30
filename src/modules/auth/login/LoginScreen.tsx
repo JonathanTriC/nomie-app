@@ -103,14 +103,14 @@ const LoginScreen: React.FC = () => {
               )}
             />
 
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <Text
                 text="Forgot password?"
                 type="bold-base"
                 textAlign="right"
                 color={Colors.primary.p600}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           <Button
