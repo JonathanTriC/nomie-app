@@ -7,7 +7,7 @@ import { Icon } from 'react-native-paper';
 import FastImage from 'react-native-fast-image';
 
 interface RenderHomeItemProps<T extends any[]> {
-  type: 'category' | 'area';
+  type: 'category' | 'area' | 'last-seen';
   query: string;
   isLoading: boolean;
   isError: boolean;
@@ -18,6 +18,9 @@ interface RenderHomeItemProps<T extends any[]> {
 const HomeScreen: React.FC = () => {
   const {
     userProfile,
+    lastSeenMeals,
+    isLoadingLastSeenMeals,
+    isErrorLastSeenMeals,
     todayRecommendation,
     isLoadingTodayRecommendation,
     popularPicks,
@@ -26,6 +29,7 @@ const HomeScreen: React.FC = () => {
     cuisinePicks,
     isLoadingCuisinePicks,
     isErrorCuisinePicks,
+    clearLastSeenMealsMutation,
     goToDetailScreen,
     onSearchByCategory,
   } = useHomeScreen();
@@ -88,23 +92,36 @@ const HomeScreen: React.FC = () => {
     if (isLoading) {
       return renderHorizontalSkeleton();
     }
-    if (isError) {
+    if (isError || data?.length === undefined) {
       return null;
     }
+
     return (
       <View style={styles.gap8}>
         <View style={styles.rowBetween}>
           <Text text={label} type="bold-lg" color={Colors.neutral.base} />
-          <TouchableOpacity
-            onPress={() =>
-              onSearchByCategory({
-                type,
-                query,
-              })
-            }
-          >
-            <Icon source={'chevron-right'} size={20} />
-          </TouchableOpacity>
+          {type !== 'last-seen' ? (
+            <TouchableOpacity
+              onPress={() =>
+                onSearchByCategory({
+                  type,
+                  query,
+                })
+              }
+            >
+              <Icon source={'chevron-right'} size={20} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => clearLastSeenMealsMutation.mutate()}
+            >
+              <Text
+                text="Clear"
+                type="regular-base"
+                color={Colors.danger.base}
+              />
+            </TouchableOpacity>
+          )}
         </View>
         <FlatList
           horizontal
@@ -194,6 +211,15 @@ const HomeScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
       )}
+
+      {renderHomeItemComponent({
+        type: 'last-seen',
+        query: popularPicks?.categoryName ?? '',
+        isLoading: isLoadingLastSeenMeals,
+        isError: isErrorLastSeenMeals,
+        label: `Back for Another Bite?`,
+        data: lastSeenMeals?.meals,
+      })}
 
       {renderHomeItemComponent({
         type: 'category',

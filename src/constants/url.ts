@@ -26,6 +26,18 @@ export const URL_PATH = {
   // MARK: Meals
   meals: {
     today_recommendation: `${API_VERSION}/${MEALS_PREFIX}/today-recommendation`,
+    last_seen: ({ limit, page }: { limit?: number; page?: number }) => {
+      const params = new URLSearchParams();
+
+      if (limit) params.append('limit', String(limit));
+      if (page) params.append('page', String(page));
+
+      const queryString = params.toString();
+
+      return `${API_VERSION}/${MEALS_PREFIX}/last-seen${
+        queryString ? `?${queryString}` : ''
+      }`;
+    },
     popular_picks: ({ limit, page }: { limit?: number; page?: number }) => {
       const params = new URLSearchParams();
 
