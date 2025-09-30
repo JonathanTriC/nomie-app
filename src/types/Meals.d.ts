@@ -26,6 +26,13 @@ type MealIngredient = {
   ingredientImage: string;
 };
 
+type LastSeenMealsData = {
+  meals: PopularPicksItem[];
+  page: number;
+  totalItems: number;
+  totalPages: number;
+};
+
 type PopularPicksData = {
   categoryName: string;
   meals: PopularPicksItem[];
