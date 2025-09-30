@@ -1,4 +1,4 @@
-import { Header, Text } from '@components';
+import { BottomModal, Button, Header, Text } from '@components';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import useProfileScreen from './useProfileScreen';
 import { styles } from './styles';
@@ -7,7 +7,13 @@ import { Colors } from '@constants';
 import { Icon } from 'react-native-paper';
 
 const ProfileScreen: React.FC = () => {
-  const { userProfile, listPreferences } = useProfileScreen();
+  const {
+    userProfile,
+    listPreferences,
+    isShowModalDeleteAccount,
+    toggleDeleteAccountModal,
+    handleDeleteAccount,
+  } = useProfileScreen();
 
   return (
     <View>
@@ -56,6 +62,27 @@ const ProfileScreen: React.FC = () => {
           </View>
         </View>
       </View>
+
+      <BottomModal isVisible={isShowModalDeleteAccount}>
+        <View style={styles.modalContent}>
+          <View style={styles.gap8}>
+            <Text text="Saying Goodbye?" type="bold-lg" textAlign="center" />
+            <Text
+              text="This action will permanently remove your account and all associated data."
+              type="regular-base"
+              color={Colors.neutral.n300}
+              textAlign="center"
+            />
+          </View>
+
+          <Button
+            outline
+            label="Keep My Account"
+            action={toggleDeleteAccountModal}
+          />
+          <Button label="Yes, Delete Account" action={handleDeleteAccount} />
+        </View>
+      </BottomModal>
     </View>
   );
 };
