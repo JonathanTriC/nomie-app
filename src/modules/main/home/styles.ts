@@ -12,6 +12,10 @@ export const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
   },
+  titleContainer: {
+    flex: 1,
+    width: screenWidth * 0.7,
+  },
   todayRecommendationCards: {
     padding: 12,
     borderRadius: 12,

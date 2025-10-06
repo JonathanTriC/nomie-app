@@ -150,6 +150,7 @@ const HomeScreen: React.FC = () => {
             text="What you want to eat today?"
             type="bold-xl"
             color={Colors.neutral.base}
+            style={styles.titleContainer}
           />
         </View>
 

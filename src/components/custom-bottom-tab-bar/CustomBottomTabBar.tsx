@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Platform } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import Animated, {
   FadeIn,
@@ -78,7 +78,7 @@ const CustomBottomTabBar: React.FC<BottomTabBarProps> = ({
               route.name,
               isFocused ? Colors.neutral.n50 : Colors.primary.p600,
             )}
-            {isFocused && (
+            {isFocused && Platform.OS === 'ios' ? (
               <Animated.Text
                 entering={FadeIn.duration(200)}
                 exiting={FadeOut.duration(200)}
@@ -86,7 +86,7 @@ const CustomBottomTabBar: React.FC<BottomTabBarProps> = ({
               >
                 {label as string}
               </Animated.Text>
-            )}
+            ) : null}
           </AnimatedTouchableOpacity>
         );
       })}
