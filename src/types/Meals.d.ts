@@ -1,0 +1,105 @@
+type MealsData = {
+  meals: Meal[];
+};
+
+type Meal = {
+  mealId: string;
+  mealName: string;
+  mealAlternate: string;
+  mealCategory: string;
+  mealArea: string;
+  mealInstructions: string;
+  mealThumbImage: string;
+  mealTags: string;
+  mealYoutubeTutorial: string;
+  mealIngredient: MealIngredient[];
+  mealSource: string;
+  mealImageSource: string;
+  mealCreativeCommonsConfirmed: string;
+  dateModified: string;
+  isFavourite: boolean;
+};
+
+type MealIngredient = {
+  ingredientName: string;
+  ingredientMeasure: string;
+  ingredientImage: string;
+};
+
+type LastSeenMealsData = {
+  meals: PopularPicksItem[];
+  page: number;
+  totalItems: number;
+  totalPages: number;
+};
+
+type PopularPicksData = {
+  categoryName: string;
+  meals: PopularPicksItem[];
+  page: number;
+  totalItems: number;
+  totalPages: number;
+};
+
+type CuisinePicksData = {
+  areaName: Area;
+  meals: PopularPicksItem[];
+  page: number;
+  totalItems: number;
+  totalPages: number;
+};
+
+type PopularPicksItem = {
+  isFavourite: boolean;
+  mealId: string;
+  mealName: string;
+  mealThumbImage: string;
+};
+
+type SearchMealsData = {
+  meals: PopularPicksItem[];
+  page: number;
+  totalItems: number;
+  totalPages: number;
+};
+
+type FavoriteMealsData = {
+  favourites: FavoriteMealsItem[];
+};
+
+type FavoriteMealsItem = {
+  mealId: string;
+  mealName: string;
+  mealThumbImage: string;
+};
+
+type DetailMealsData = {
+  mealId: string;
+  mealName: string;
+  mealAlternate: string;
+  mealCategory: string;
+  mealArea: string;
+  mealInstructions: string;
+  mealThumbImage: string;
+  mealTags: string;
+  mealYoutubeTutorial: string;
+  mealIngredient: MealIngredient[];
+  mealSource: string;
+  mealImageSource: string;
+  mealCreativeCommonsConfirmed: string;
+  dateModified: string;
+  isFavourite: boolean;
+  reviews: MealReview[];
+  avgRating: number;
+  totalReviews: number;
+};
+
+type MealReview = {
+  id: number;
+  userId: string;
+  mealId: string;
+  rating: number;
+  reviewText: string;
+  reviewImage?: string;
+  createdAt: Date;
+};
